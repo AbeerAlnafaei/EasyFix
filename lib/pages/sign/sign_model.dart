@@ -11,11 +11,20 @@ class SignModel extends FlutterFlowModel<SignWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
+  // State field(s) for TextField widget.
+  FocusNode? textFieldFocusNode;
+  TextEditingController? textController1;
+  String? Function(BuildContext, String?)? textController1Validator;
   // State field(s) for emailAddress_Create widget.
-  FocusNode? emailAddressCreateFocusNode;
-  TextEditingController? emailAddressCreateController;
+  FocusNode? emailAddressCreateFocusNode1;
+  TextEditingController? emailAddressCreateController1;
   String? Function(BuildContext, String?)?
-      emailAddressCreateControllerValidator;
+      emailAddressCreateController1Validator;
+  // State field(s) for emailAddress_Create widget.
+  FocusNode? emailAddressCreateFocusNode2;
+  TextEditingController? emailAddressCreateController2;
+  String? Function(BuildContext, String?)?
+      emailAddressCreateController2Validator;
   // State field(s) for password_Create widget.
   FocusNode? passwordCreateFocusNode;
   TextEditingController? passwordCreateController;
@@ -27,8 +36,6 @@ class SignModel extends FlutterFlowModel<SignWidget> {
   late bool passwordConfirmVisibility;
   String? Function(BuildContext, String?)? passwordConfirmControllerValidator;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     passwordCreateVisibility = false;
@@ -39,8 +46,14 @@ class SignModel extends FlutterFlowModel<SignWidget> {
   void dispose() {
     unfocusNode.dispose();
     tabBarController?.dispose();
-    emailAddressCreateFocusNode?.dispose();
-    emailAddressCreateController?.dispose();
+    textFieldFocusNode?.dispose();
+    textController1?.dispose();
+
+    emailAddressCreateFocusNode1?.dispose();
+    emailAddressCreateController1?.dispose();
+
+    emailAddressCreateFocusNode2?.dispose();
+    emailAddressCreateController2?.dispose();
 
     passwordCreateFocusNode?.dispose();
     passwordCreateController?.dispose();
@@ -48,8 +61,4 @@ class SignModel extends FlutterFlowModel<SignWidget> {
     passwordConfirmFocusNode?.dispose();
     passwordConfirmController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

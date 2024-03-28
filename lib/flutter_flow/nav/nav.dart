@@ -207,6 +207,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             initialPage: '',
             page: SchedulUrgentWidget(),
           ),
+        ),
+        FFRoute(
+          name: 'calenderCopy',
+          path: '/calenderCopy',
+          builder: (context, params) => const NavBarPage(
+            initialPage: '',
+            page: CalenderCopyWidget(),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -339,8 +347,12 @@ class FFParameters {
       return param;
     }
     // Return serialized value.
-    return deserializeParam<T>(param, type, isList,
-        collectionNamePath: collectionNamePath);
+    return deserializeParam<T>(
+      param,
+      type,
+      isList,
+      collectionNamePath: collectionNamePath,
+    );
   }
 }
 

@@ -94,6 +94,7 @@ class _CalenderWidgetState extends State<CalenderWidget>
                   fontFamily: 'Outfit',
                   color: Colors.white,
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
                 ),
           ),
           actions: const [],
@@ -129,7 +130,10 @@ class _CalenderWidgetState extends State<CalenderWidget>
                                 BoxShadow(
                                   blurRadius: 3.0,
                                   color: Color(0x33000000),
-                                  offset: Offset(0.0, 1.0),
+                                  offset: Offset(
+                                    0.0,
+                                    1.0,
+                                  ),
                                 )
                               ],
                             ),
@@ -143,16 +147,36 @@ class _CalenderWidgetState extends State<CalenderWidget>
                                 setState(() => _model.calendarSelectedDay =
                                     newSelectedDate);
                               },
-                              titleStyle:
-                                  FlutterFlowTheme.of(context).titleLarge,
-                              dayOfWeekStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
-                              dateStyle:
-                                  FlutterFlowTheme.of(context).bodyMedium,
-                              selectedDateStyle:
-                                  FlutterFlowTheme.of(context).titleSmall,
-                              inactiveDateStyle:
-                                  FlutterFlowTheme.of(context).labelMedium,
+                              titleStyle: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    fontFamily: 'Outfit',
+                                    letterSpacing: 0.0,
+                                  ),
+                              dayOfWeekStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              dateStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              selectedDateStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              inactiveDateStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
                             ),
                           ).animateOnPageLoad(
                               animationsMap['containerOnPageLoadAnimation']!),
@@ -178,6 +202,7 @@ class _CalenderWidgetState extends State<CalenderWidget>
                                       fontFamily: 'Lexend Deca',
                                       color: Colors.white,
                                       fontSize: 16.0,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.normal,
                                     ),
                                 elevation: 2.0,

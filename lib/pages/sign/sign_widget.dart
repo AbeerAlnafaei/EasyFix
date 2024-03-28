@@ -1,5 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -60,8 +61,14 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
       length: 1,
       initialIndex: 0,
     )..addListener(() => setState(() {}));
-    _model.emailAddressCreateController ??= TextEditingController();
-    _model.emailAddressCreateFocusNode ??= FocusNode();
+    _model.textController1 ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
+
+    _model.emailAddressCreateController1 ??= TextEditingController();
+    _model.emailAddressCreateFocusNode1 ??= FocusNode();
+
+    _model.emailAddressCreateController2 ??= TextEditingController();
+    _model.emailAddressCreateFocusNode2 ??= FocusNode();
 
     _model.passwordCreateController ??= TextEditingController();
     _model.passwordCreateFocusNode ??= FocusNode();
@@ -86,6 +93,27 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).secondaryText,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: const Icon(
+              Icons.arrow_back_rounded,
+              color: Colors.white,
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
+          ),
+          actions: const [],
+          centerTitle: false,
+          elevation: 2.0,
+        ),
         body: SafeArea(
           top: true,
           child: Row(
@@ -124,25 +152,6 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                               ),
                             ),
                             alignment: const AlignmentDirectional(-1.0, 0.0),
-                            child: Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      'EasyFix',
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineMedium,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
                           ),
                         ),
                         Container(
@@ -171,16 +180,21 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                             .secondaryText,
                                     labelPadding: const EdgeInsets.all(16.0),
                                     labelStyle: FlutterFlowTheme.of(context)
-                                        .displaySmall,
+                                        .displaySmall
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          letterSpacing: 0.0,
+                                        ),
                                     unselectedLabelStyle:
                                         FlutterFlowTheme.of(context)
                                             .displaySmall
                                             .override(
                                               fontFamily: 'Outfit',
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.normal,
                                             ),
-                                    indicatorColor:
-                                        FlutterFlowTheme.of(context).tertiary,
+                                    indicatorColor: FlutterFlowTheme.of(context)
+                                        .secondaryText,
                                     indicatorWeight: 4.0,
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 12.0, 16.0, 12.0),
@@ -219,7 +233,109 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                   'Don\'t have an account? Please fill in your information to create one!',
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .labelMedium,
+                                                      .labelMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        8.0, 12.0, 8.0, 12.0),
+                                                child: TextFormField(
+                                                  controller:
+                                                      _model.textController1,
+                                                  focusNode:
+                                                      _model.textFieldFocusNode,
+                                                  autofocus: true,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelText:
+                                                        'First and last name',
+                                                    labelStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    hintStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    enabledBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                    focusedBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                    errorBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .error,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                    ),
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                  minLines: null,
+                                                  validator: _model
+                                                      .textController1Validator
+                                                      .asValidator(context),
                                                 ),
                                               ),
                                               Padding(
@@ -230,20 +346,26 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .emailAddressCreateController,
+                                                        .emailAddressCreateController1,
                                                     focusNode: _model
-                                                        .emailAddressCreateFocusNode,
+                                                        .emailAddressCreateFocusNode1,
                                                     autofocus: true,
                                                     autofillHints: const [
                                                       AutofillHints.email
                                                     ],
                                                     obscureText: false,
                                                     decoration: InputDecoration(
-                                                      labelText: 'Email',
+                                                      labelText: 'phone Number',
                                                       labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .labelMedium,
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
@@ -301,7 +423,13 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    minLines: null,
                                                     keyboardType: TextInputType
                                                         .emailAddress,
                                                     cursorColor:
@@ -309,7 +437,111 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .emailAddressCreateControllerValidator
+                                                        .emailAddressCreateController1Validator
+                                                        .asValidator(context),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 0.0, 16.0),
+                                                child: SizedBox(
+                                                  width: double.infinity,
+                                                  child: TextFormField(
+                                                    controller: _model
+                                                        .emailAddressCreateController2,
+                                                    focusNode: _model
+                                                        .emailAddressCreateFocusNode2,
+                                                    autofocus: true,
+                                                    autofillHints: const [
+                                                      AutofillHints.email
+                                                    ],
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      labelText: 'Address',
+                                                      labelStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .alternate,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(40.0),
+                                                      ),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(40.0),
+                                                      ),
+                                                      errorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(40.0),
+                                                      ),
+                                                      focusedErrorBorder:
+                                                          OutlineInputBorder(
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .error,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(40.0),
+                                                      ),
+                                                      filled: true,
+                                                      fillColor: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      contentPadding:
+                                                          const EdgeInsets.all(24.0),
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    minLines: null,
+                                                    keyboardType: TextInputType
+                                                        .emailAddress,
+                                                    cursorColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                    validator: _model
+                                                        .emailAddressCreateController2Validator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -325,6 +557,7 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                         .passwordCreateController,
                                                     focusNode: _model
                                                         .passwordCreateFocusNode,
+                                                    autofocus: false,
                                                     autofillHints: const [
                                                       AutofillHints.password
                                                     ],
@@ -335,7 +568,13 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                       labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .labelMedium,
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
@@ -415,7 +654,13 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                    minLines: null,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -437,6 +682,7 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                         .passwordConfirmController,
                                                     focusNode: _model
                                                         .passwordConfirmFocusNode,
+                                                    autofocus: false,
                                                     autofillHints: const [
                                                       AutofillHints.password
                                                     ],
@@ -448,7 +694,13 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                       labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .labelMedium,
+                                                              .labelMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Readex Pro',
+                                                                letterSpacing:
+                                                                    0.0,
+                                                              ),
                                                       enabledBorder:
                                                           OutlineInputBorder(
                                                         borderSide: BorderSide(
@@ -528,8 +780,12 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                     ),
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .bodyMedium,
-                                                    minLines: 1,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -573,7 +829,7 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                           .createAccountWithEmail(
                                                         context,
                                                         _model
-                                                            .emailAddressCreateController
+                                                            .emailAddressCreateController1
                                                             .text,
                                                         _model
                                                             .passwordCreateController
@@ -605,10 +861,7 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                                   0.0,
                                                                   0.0,
                                                                   0.0),
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .tertiary,
+                                                      color: const Color(0xFF395C7D),
                                                       textStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -618,6 +871,8 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                                     'Readex Pro',
                                                                 color: Colors
                                                                     .white,
+                                                                letterSpacing:
+                                                                    0.0,
                                                               ),
                                                       elevation: 3.0,
                                                       borderSide: const BorderSide(

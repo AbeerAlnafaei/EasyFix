@@ -154,12 +154,13 @@ class _MainpageWidgetState extends State<MainpageWidget> {
                                 24.0, 0.0, 24.0, 12.0),
                             iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primaryText,
+                            color: const Color(0xFF395C7D),
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
                                   fontFamily: 'Readex Pro',
                                   color: Colors.white,
+                                  letterSpacing: 0.0,
                                 ),
                             elevation: 3.0,
                             borderSide: const BorderSide(
@@ -206,6 +207,7 @@ class _MainpageWidgetState extends State<MainpageWidget> {
                                   fontFamily: 'Readex Pro',
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
+                                  letterSpacing: 0.0,
                                 ),
                             elevation: 3.0,
                             borderSide: BorderSide(

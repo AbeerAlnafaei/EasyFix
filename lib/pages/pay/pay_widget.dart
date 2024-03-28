@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'pay_model.dart';
 export 'pay_model.dart';
 
@@ -64,26 +65,18 @@ class _PayWidgetState extends State<PayWidget> {
                 ],
               ),
             ),
-            Container(
-              width: 140.0,
-              height: 140.0,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).accent1,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: FlutterFlowTheme.of(context).primary,
-                  width: 2.0,
-                ),
+            Expanded(
+              child: Lottie.asset(
+                'assets/lottie_animations/92578-check-okey-done.json',
+                width: 180.0,
+                height: 115.0,
+                fit: BoxFit.cover,
+                animate: true,
               ),
-              alignment: const AlignmentDirectional(0.0, 0.0),
-              child: Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Icon(
-                  Icons.check_rounded,
-                  color: FlutterFlowTheme.of(context).primary,
-                  size: 60.0,
-                ),
-              ),
+            ),
+            Divider(
+              thickness: 1.0,
+              color: FlutterFlowTheme.of(context).accent4,
             ),
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
@@ -93,6 +86,7 @@ class _PayWidgetState extends State<PayWidget> {
                       fontFamily: 'Outfit',
                       color: FlutterFlowTheme.of(context).primary,
                       fontSize: 33.0,
+                      letterSpacing: 0.0,
                     ),
               ),
             ),
@@ -100,7 +94,10 @@ class _PayWidgetState extends State<PayWidget> {
               padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
               child: Text(
                 '25 SAR',
-                style: FlutterFlowTheme.of(context).displayLarge,
+                style: FlutterFlowTheme.of(context).displayLarge.override(
+                      fontFamily: 'Outfit',
+                      letterSpacing: 0.0,
+                    ),
               ),
             ),
             Padding(
@@ -108,7 +105,10 @@ class _PayWidgetState extends State<PayWidget> {
               child: Text(
                 'Thank you for your reservation! Your payment has been successfully processed. We look forward to serving you. \n',
                 textAlign: TextAlign.center,
-                style: FlutterFlowTheme.of(context).labelLarge,
+                style: FlutterFlowTheme.of(context).labelLarge.override(
+                      fontFamily: 'Readex Pro',
+                      letterSpacing: 0.0,
+                    ),
               ),
             ),
             Padding(
@@ -150,8 +150,13 @@ class _PayWidgetState extends State<PayWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 4.0),
                               child: Text(
-                                'Mastercard Ending in 4021',
-                                style: FlutterFlowTheme.of(context).bodyLarge,
+                                'Mastercard Ending in 4531',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
                             ),
                             Padding(
@@ -159,7 +164,12 @@ class _PayWidgetState extends State<PayWidget> {
                                   0.0, 0.0, 0.0, 4.0),
                               child: Text(
                                 '25 SAR',
-                                style: FlutterFlowTheme.of(context).labelMedium,
+                                style: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
                             ),
                           ],
@@ -189,8 +199,12 @@ class _PayWidgetState extends State<PayWidget> {
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).alternate,
-                        textStyle: FlutterFlowTheme.of(context).bodyLarge,
+                        color: const Color(0xFF395C7D),
+                        textStyle:
+                            FlutterFlowTheme.of(context).bodyLarge.override(
+                                  fontFamily: 'Readex Pro',
+                                  letterSpacing: 0.0,
+                                ),
                         elevation: 0.0,
                         borderSide: const BorderSide(
                           color: Colors.transparent,

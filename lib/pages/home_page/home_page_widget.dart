@@ -1,5 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
@@ -65,104 +66,113 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     topRight: Radius.circular(0.0),
                   ),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 16.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Hello, ',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Outfit',
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  fontSize: 32.0,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                2.0, 0.0, 0.0, 0.0),
-                            child: Text(
-                              'Ahmad',
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 16.0, 16.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Hello, ',
                               style: FlutterFlowTheme.of(context)
-                                  .displaySmall
+                                  .bodyMedium
                                   .override(
                                     fontFamily: 'Outfit',
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
                                     fontSize: 32.0,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
                                   ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 10.0),
-                      child: Text(
-                        'how can we help you today?',
-                        style:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Plus Jakarta Sans',
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          20.0, 12.0, 20.0, 12.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 45.0,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              blurRadius: 4.0,
-                              color: Color(0x34090F13),
-                              offset: Offset(0.0, 2.0),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              12.0, 8.0, 12.0, 8.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Easy Fix Services :',
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  2.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Ahmad',
                                 style: FlutterFlowTheme.of(context)
-                                    .titleLarge
+                                    .displaySmall
                                     .override(
                                       fontFamily: 'Outfit',
-                                      color: const Color(0xFF14181B),
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.w500,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      fontSize: 32.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w600,
                                     ),
                               ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 10.0),
+                        child: Text(
+                          'how can we help you today?',
+                          style:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Plus Jakarta Sans',
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            20.0, 12.0, 20.0, 12.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 45.0,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: const [
+                              BoxShadow(
+                                blurRadius: 4.0,
+                                color: Color(0x34090F13),
+                                offset: Offset(
+                                  0.0,
+                                  2.0,
+                                ),
+                              )
                             ],
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                12.0, 8.0, 12.0, 8.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Easy Fix Services :',
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleLarge
+                                      .override(
+                                        fontFamily: 'Outfit',
+                                        color: const Color(0xFF14181B),
+                                        fontSize: 20.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Padding(
@@ -195,25 +205,75 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             children: [
                               Align(
                                 alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(0.0),
-                                    bottomRight: Radius.circular(0.0),
-                                    topLeft: Radius.circular(30.0),
-                                    topRight: Radius.circular(30.0),
-                                  ),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1553265381-674034b34554?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxOXx8cGx1bWJpbmd8ZW58MHx8fHwxNzExNTg3MzQ1fDA&ixlib=rb-4.0.3&q=80&w=1080',
-                                    width: 348.0,
-                                    height: 97.0,
-                                    fit: BoxFit.cover,
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    final selectedMedia = await selectMedia(
+                                      maxWidth: 200.00,
+                                      maxHeight: 100.00,
+                                      mediaSource: MediaSource.photoGallery,
+                                      multiImage: false,
+                                    );
+                                    if (selectedMedia != null &&
+                                        selectedMedia.every((m) =>
+                                            validateFileFormat(
+                                                m.storagePath, context))) {
+                                      setState(
+                                          () => _model.isDataUploading = true);
+                                      var selectedUploadedFiles =
+                                          <FFUploadedFile>[];
+
+                                      try {
+                                        selectedUploadedFiles = selectedMedia
+                                            .map((m) => FFUploadedFile(
+                                                  name: m.storagePath
+                                                      .split('/')
+                                                      .last,
+                                                  bytes: m.bytes,
+                                                  height: m.dimensions?.height,
+                                                  width: m.dimensions?.width,
+                                                  blurHash: m.blurHash,
+                                                ))
+                                            .toList();
+                                      } finally {
+                                        _model.isDataUploading = false;
+                                      }
+                                      if (selectedUploadedFiles.length ==
+                                          selectedMedia.length) {
+                                        setState(() {
+                                          _model.uploadedLocalFile =
+                                              selectedUploadedFiles.first;
+                                        });
+                                      } else {
+                                        setState(() {});
+                                        return;
+                                      }
+                                    }
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.circular(0.0),
+                                      bottomRight: Radius.circular(0.0),
+                                      topLeft: Radius.circular(30.0),
+                                      topRight: Radius.circular(30.0),
+                                    ),
+                                    child: Image.asset(
+                                      'assets/images/plumbing1.jpg',
+                                      width: 348.0,
+                                      height: 98.0,
+                                      fit: BoxFit.fill,
+                                      alignment: const Alignment(0.0, 0.0),
+                                    ),
                                   ),
                                 ),
                               ),
                               Align(
                                 alignment: const AlignmentDirectional(0.0, 1.0),
                                 child: Container(
-                                  width: 331.0,
+                                  width: 348.0,
                                   height: 45.0,
                                   decoration: BoxDecoration(
                                     color:
@@ -222,7 +282,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       BoxShadow(
                                         blurRadius: 4.0,
                                         color: Color(0x33000000),
-                                        offset: Offset(0.0, 2.0),
+                                        offset: Offset(
+                                          0.0,
+                                          2.0,
+                                        ),
                                       )
                                     ],
                                     borderRadius: const BorderRadius.only(
@@ -257,6 +320,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16.0,
+                                                    letterSpacing: 0.0,
                                                   ),
                                             ),
                                           ),
@@ -277,7 +341,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           child: Text(
                                             '4.9',
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                         ),
                                         Align(
@@ -330,18 +398,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     topLeft: Radius.circular(30.0),
                                     topRight: Radius.circular(30.0),
                                   ),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1562259949-e8e7689d7828?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyfHxwYWludGluZyUyMHdhbGx8ZW58MHx8fHwxNzExNTkwNzA3fDA&ixlib=rb-4.0.3&q=80&w=1080',
+                                  child: Image.asset(
+                                    'assets/images/painting1.jpg',
                                     width: 348.0,
                                     height: 98.0,
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
                               ),
                               Align(
                                 alignment: const AlignmentDirectional(0.0, 1.0),
                                 child: Container(
-                                  width: 331.0,
+                                  width: 348.0,
                                   height: 45.0,
                                   decoration: BoxDecoration(
                                     color:
@@ -350,7 +418,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       BoxShadow(
                                         blurRadius: 4.0,
                                         color: Color(0x33000000),
-                                        offset: Offset(0.0, 2.0),
+                                        offset: Offset(
+                                          0.0,
+                                          2.0,
+                                        ),
                                       )
                                     ],
                                     borderRadius: const BorderRadius.only(
@@ -388,6 +459,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   context)
                                                               .primaryText,
                                                       fontSize: 16.0,
+                                                      letterSpacing: 0.0,
                                                     ),
                                               ),
                                             ),
@@ -410,7 +482,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               '4.8',
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
                                             ),
                                           ),
                                           Align(
@@ -465,10 +542,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     topLeft: Radius.circular(30.0),
                                     topRight: Radius.circular(30.0),
                                   ),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1621905251918-48416bd8575a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHw0fHxBcHBsaWFuY2UlMjBSZXBhaXIlMjB8ZW58MHx8fHwxNzExNjA2NzI0fDA&ixlib=rb-4.0.3&q=80&w=1080',
+                                  child: Image.asset(
+                                    'assets/images/appliance1.jpg',
                                     width: 348.0,
-                                    height: 97.0,
+                                    height: 98.0,
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -476,7 +553,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               Align(
                                 alignment: const AlignmentDirectional(0.0, 1.0),
                                 child: Container(
-                                  width: 331.0,
+                                  width: 348.0,
                                   height: 45.0,
                                   decoration: BoxDecoration(
                                     color:
@@ -485,7 +562,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       BoxShadow(
                                         blurRadius: 4.0,
                                         color: Color(0x33000000),
-                                        offset: Offset(0.0, 2.0),
+                                        offset: Offset(
+                                          0.0,
+                                          2.0,
+                                        ),
                                       )
                                     ],
                                     borderRadius: const BorderRadius.only(
@@ -520,6 +600,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16.0,
+                                                    letterSpacing: 0.0,
                                                   ),
                                             ),
                                           ),
@@ -540,7 +621,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           child: Text(
                                             '4.7',
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                         ),
                                         Align(
@@ -593,18 +678,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     topLeft: Radius.circular(30.0),
                                     topRight: Radius.circular(30.0),
                                   ),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1553265381-674034b34554?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxOXx8cGx1bWJpbmd8ZW58MHx8fHwxNzExNTg3MzQ1fDA&ixlib=rb-4.0.3&q=80&w=1080',
+                                  child: Image.asset(
+                                    'assets/images/Electrical1.jpg',
                                     width: 348.0,
                                     height: 98.0,
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
                               ),
                               Align(
                                 alignment: const AlignmentDirectional(0.0, 1.0),
                                 child: Container(
-                                  width: 331.0,
+                                  width: 348.0,
                                   height: 45.0,
                                   decoration: BoxDecoration(
                                     color:
@@ -613,7 +698,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       BoxShadow(
                                         blurRadius: 4.0,
                                         color: Color(0x33000000),
-                                        offset: Offset(0.0, 2.0),
+                                        offset: Offset(
+                                          0.0,
+                                          2.0,
+                                        ),
                                       )
                                     ],
                                     borderRadius: const BorderRadius.only(
@@ -648,6 +736,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16.0,
+                                                    letterSpacing: 0.0,
                                                   ),
                                             ),
                                           ),
@@ -668,7 +757,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           child: Text(
                                             '4.9',
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                         ),
                                         Align(
@@ -721,18 +814,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     topLeft: Radius.circular(30.0),
                                     topRight: Radius.circular(30.0),
                                   ),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1553265381-674034b34554?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwxOXx8cGx1bWJpbmd8ZW58MHx8fHwxNzExNTg3MzQ1fDA&ixlib=rb-4.0.3&q=80&w=1080',
+                                  child: Image.asset(
+                                    'assets/images/AC1.jpg',
                                     width: 348.0,
-                                    height: 97.0,
-                                    fit: BoxFit.cover,
+                                    height: 98.0,
+                                    fit: BoxFit.fill,
+                                    alignment: const Alignment(0.0, -1.0),
                                   ),
                                 ),
                               ),
                               Align(
                                 alignment: const AlignmentDirectional(0.0, 1.0),
                                 child: Container(
-                                  width: 331.0,
+                                  width: 348.0,
                                   height: 45.0,
                                   decoration: BoxDecoration(
                                     color:
@@ -741,7 +835,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       BoxShadow(
                                         blurRadius: 4.0,
                                         color: Color(0x33000000),
-                                        offset: Offset(0.0, 2.0),
+                                        offset: Offset(
+                                          0.0,
+                                          2.0,
+                                        ),
                                       )
                                     ],
                                     borderRadius: const BorderRadius.only(
@@ -776,6 +873,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16.0,
+                                                    letterSpacing: 0.0,
                                                   ),
                                             ),
                                           ),
@@ -796,7 +894,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           child: Text(
                                             '5.0',
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                         ),
                                         Align(
@@ -849,10 +951,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     topLeft: Radius.circular(30.0),
                                     topRight: Radius.circular(30.0),
                                   ),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1581578017093-cd30fce4eeb7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwyfHxQZXN0JTIwQ29udHJvbHxlbnwwfHx8fDE3MTE2MDY4NDV8MA&ixlib=rb-4.0.3&q=80&w=1080',
+                                  child: Image.asset(
+                                    'assets/images/Pest1.jpg',
                                     width: 348.0,
-                                    height: 97.0,
+                                    height: 98.0,
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -860,7 +962,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               Align(
                                 alignment: const AlignmentDirectional(0.0, 1.0),
                                 child: Container(
-                                  width: 331.0,
+                                  width: 348.0,
                                   height: 45.0,
                                   decoration: BoxDecoration(
                                     color:
@@ -869,7 +971,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       BoxShadow(
                                         blurRadius: 4.0,
                                         color: Color(0x33000000),
-                                        offset: Offset(0.0, 2.0),
+                                        offset: Offset(
+                                          0.0,
+                                          2.0,
+                                        ),
                                       )
                                     ],
                                     borderRadius: const BorderRadius.only(
@@ -904,6 +1009,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             context)
                                                         .primaryText,
                                                     fontSize: 16.0,
+                                                    letterSpacing: 0.0,
                                                   ),
                                             ),
                                           ),
@@ -924,7 +1030,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           child: Text(
                                             '4.7',
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  letterSpacing: 0.0,
+                                                ),
                                           ),
                                         ),
                                         Align(

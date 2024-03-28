@@ -7,22 +7,24 @@ class BookingS01Model extends FlutterFlowModel<BookingS01Widget> {
 
   final unfocusNode = FocusNode();
   // State field(s) for Column widget.
-  ScrollController? columnController;
-
-  /// Initialization and disposal methods.
+  ScrollController? columnController1;
+  // State field(s) for Column widget.
+  ScrollController? columnController2;
+  // State field(s) for Column widget.
+  ScrollController? columnController3;
 
   @override
   void initState(BuildContext context) {
-    columnController = ScrollController();
+    columnController1 = ScrollController();
+    columnController2 = ScrollController();
+    columnController3 = ScrollController();
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    columnController?.dispose();
+    columnController1?.dispose();
+    columnController2?.dispose();
+    columnController3?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

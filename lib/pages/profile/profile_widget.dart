@@ -111,6 +111,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         fontFamily: 'Plus Jakarta Sans',
                         color: Colors.white,
                         fontSize: 22.0,
+                        letterSpacing: 0.0,
                         fontWeight: FontWeight.bold,
                       ),
                 ),
@@ -125,7 +126,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       BoxShadow(
                         blurRadius: 3.0,
                         color: Color(0x33000000),
-                        offset: Offset(0.0, -1.0),
+                        offset: Offset(
+                          0.0,
+                          -1.0,
+                        ),
                       )
                     ],
                     borderRadius: BorderRadius.only(
@@ -158,6 +162,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         fontFamily: 'Plus Jakarta Sans',
                                         color: const Color(0xFF101213),
                                         fontSize: 22.0,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
@@ -191,6 +196,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 fontFamily: 'Plus Jakarta Sans',
                                                 color: const Color(0xFF101213),
                                                 fontSize: 14.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),
@@ -205,6 +211,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             fontFamily: 'Plus Jakarta Sans',
                                             color: const Color(0xFF4B39EF),
                                             fontSize: 14.0,
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
@@ -240,6 +247,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 fontFamily: 'Plus Jakarta Sans',
                                                 color: const Color(0xFF101213),
                                                 fontSize: 14.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),
@@ -254,6 +262,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             fontFamily: 'Plus Jakarta Sans',
                                             color: const Color(0xFF4B39EF),
                                             fontSize: 14.0,
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
                                           ),
                                     ),
@@ -289,6 +298,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 fontFamily: 'Plus Jakarta Sans',
                                                 color: const Color(0xFF101213),
                                                 fontSize: 14.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),
@@ -331,6 +341,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 fontFamily: 'Plus Jakarta Sans',
                                                 color: const Color(0xFF101213),
                                                 fontSize: 14.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),
@@ -373,22 +384,101 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 fontFamily: 'Plus Jakarta Sans',
                                                 color: const Color(0xFF101213),
                                                 fontSize: 14.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                         ),
                                       ),
                                     ),
-                                    Text(
-                                      'Log Out?',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Plus Jakarta Sans',
-                                            color: const Color(0xFF4B39EF),
-                                            fontSize: 14.0,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        var confirmDialogResponse =
+                                            await showDialog<bool>(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: const Text('Log Out'),
+                                                      content: const Text(
+                                                          'Are you sure you want to log out from yout account?'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  false),
+                                                          child: const Text('Cancel'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  true),
+                                                          child:
+                                                              const Text('Log Out'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ) ??
+                                                false;
+                                        if (confirmDialogResponse) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Yes',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  const Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                            ),
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'No',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  const Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      child: Text(
+                                        'Log Out?',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Plus Jakarta Sans',
+                                              color: const Color(0xFF4B39EF),
+                                              fontSize: 14.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
                                     ),
                                   ],
                                 ),

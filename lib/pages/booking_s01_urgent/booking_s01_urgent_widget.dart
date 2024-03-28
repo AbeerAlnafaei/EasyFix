@@ -129,6 +129,7 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                   fontFamily: 'Outfit',
                   color: Colors.white,
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
                 ),
           ),
           actions: const [],
@@ -166,7 +167,7 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                                     fit: BoxFit.fill,
                                     alignment: const AlignmentDirectional(5.0, 0.0),
                                     image: Image.asset(
-                                      'assets/images/Your_Step-By-Step_Guide_to_Painting_the_Perfect_Wall.jpeg',
+                                      'assets/images/painting1.jpg',
                                     ).image,
                                   ),
                                   borderRadius: BorderRadius.circular(0.0),
@@ -184,7 +185,7 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                               width: 380.0,
                               height: 120.0,
                               decoration: const BoxDecoration(
-                                color: Color(0xFF15212C),
+                                color: Color(0xFF395C7D),
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(0.0),
                                   bottomRight: Radius.circular(0.0),
@@ -212,6 +213,7 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                                               .override(
                                                 fontFamily: 'Readex Pro',
                                                 color: Colors.white,
+                                                letterSpacing: 0.0,
                                               ),
                                         ),
                                         const Align(
@@ -239,6 +241,7 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                                                 .override(
                                                   fontFamily: 'Readex Pro',
                                                   color: Colors.white,
+                                                  letterSpacing: 0.0,
                                                 ),
                                           ),
                                         ),
@@ -327,6 +330,8 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                                                               fontFamily:
                                                                   'Readex Pro',
                                                               fontSize: 12.0,
+                                                              letterSpacing:
+                                                                  0.0,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
@@ -365,6 +370,7 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                                                         fontFamily:
                                                             'Readex Pro',
                                                         fontSize: 20.0,
+                                                        letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                       ),
@@ -374,7 +380,12 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                                                 'for the Reservation:  50 SAR',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          letterSpacing: 0.0,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -410,12 +421,13 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: const Color(0xFF15212C),
+                      color: const Color(0xFF395C7D),
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Lexend Deca',
                                 color: Colors.white,
                                 fontSize: 16.0,
+                                letterSpacing: 0.0,
                                 fontWeight: FontWeight.normal,
                               ),
                       elevation: 2.0,

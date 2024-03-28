@@ -18,3 +18,4 @@ export '/pages/booking_s01_urgent/booking_s01_urgent_widget.dart'
     show BookingS01UrgentWidget;
 export '/pages/schedul_urgent/schedul_urgent_widget.dart'
     show SchedulUrgentWidget;
+export '/pages/calender_copy/calender_copy_widget.dart' show CalenderCopyWidget;

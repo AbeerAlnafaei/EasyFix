@@ -11,17 +11,15 @@ class LogInModel extends FlutterFlowModel<LogInWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
+  // State field(s) for emailAddress widget.
+  FocusNode? emailAddressFocusNode;
+  TextEditingController? emailAddressController;
+  String? Function(BuildContext, String?)? emailAddressControllerValidator;
   // State field(s) for password widget.
   FocusNode? passwordFocusNode;
   TextEditingController? passwordController;
   late bool passwordVisibility;
   String? Function(BuildContext, String?)? passwordControllerValidator;
-  // State field(s) for emailAddress widget.
-  FocusNode? emailAddressFocusNode;
-  TextEditingController? emailAddressController;
-  String? Function(BuildContext, String?)? emailAddressControllerValidator;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
@@ -32,14 +30,10 @@ class LogInModel extends FlutterFlowModel<LogInWidget> {
   void dispose() {
     unfocusNode.dispose();
     tabBarController?.dispose();
-    passwordFocusNode?.dispose();
-    passwordController?.dispose();
-
     emailAddressFocusNode?.dispose();
     emailAddressController?.dispose();
+
+    passwordFocusNode?.dispose();
+    passwordController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }
