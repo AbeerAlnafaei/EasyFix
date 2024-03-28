@@ -233,7 +233,7 @@ class _BookingS01WidgetState extends State<BookingS01Widget>
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   5.0, 0.0, 0.0, 0.0),
                                           child: Text(
-                                            '4.8',
+                                            '4.5',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -701,24 +701,18 @@ class _BookingS01WidgetState extends State<BookingS01Widget>
                                                     .fromSTEB(
                                                         0.0, 20.0, 0.0, 0.0),
                                                 child: Text(
-                                                  'Payment ',
+                                                  'Payment for the Reservation:  25 SAR',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily:
                                                             'Readex Pro',
-                                                        fontSize: 20.0,
+                                                        fontSize: 15.0,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                       ),
                                                 ),
-                                              ),
-                                              Text(
-                                                'for the Reservation:  25 SAR',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
                                               ),
                                               Align(
                                                 alignment: const AlignmentDirectional(
