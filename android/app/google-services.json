@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1000610675167",
+    "project_id": "easyfix-504dd",
+    "storage_bucket": "easyfix-504dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000610675167:android:3b16ed70ef611ea0b6ec6a",
+        "android_client_info": {
+          "package_name": "com.mycompany.easyfix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8okFIfS3kmKpX33A5RlZV9KsolZhg8mI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
