@@ -459,10 +459,7 @@ class _S06WidgetState extends State<S06Widget> with TickerProviderStateMixin {
                                                       .fromSTEB(
                                                           0.0, 30.0, 0.0, 20.0),
                                                   child: FFButtonWidget(
-                                                    onPressed: () {
-                                                      print(
-                                                          'Button pressed ...');
-                                                    },
+                                                    onPressed: () async {},
                                                     text: 'Book',
                                                     options: FFButtonOptions(
                                                       width: 320.0,

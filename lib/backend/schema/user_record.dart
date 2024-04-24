@@ -35,11 +35,41 @@ class UserRecord extends FirestoreRecord {
   String get email => _email ?? '';
   bool hasEmail() => _email != null;
 
+  // "display_name" field.
+  String? _displayName;
+  String get displayName => _displayName ?? '';
+  bool hasDisplayName() => _displayName != null;
+
+  // "photo_url" field.
+  String? _photoUrl;
+  String get photoUrl => _photoUrl ?? '';
+  bool hasPhotoUrl() => _photoUrl != null;
+
+  // "phone_number" field.
+  String? _phoneNumber;
+  String get phoneNumber => _phoneNumber ?? '';
+  bool hasPhoneNumber() => _phoneNumber != null;
+
+  // "created_time" field.
+  DateTime? _createdTime;
+  DateTime? get createdTime => _createdTime;
+  bool hasCreatedTime() => _createdTime != null;
+
+  // "uid" field.
+  String? _uid;
+  String get uid => _uid ?? '';
+  bool hasUid() => _uid != null;
+
   void _initializeFields() {
     _name = snapshotData['Name'] as String?;
     _address = snapshotData['Address'] as String?;
     _password = snapshotData['Password'] as String?;
     _email = snapshotData['email'] as String?;
+    _displayName = snapshotData['display_name'] as String?;
+    _photoUrl = snapshotData['photo_url'] as String?;
+    _phoneNumber = snapshotData['phone_number'] as String?;
+    _createdTime = snapshotData['created_time'] as DateTime?;
+    _uid = snapshotData['uid'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -80,6 +110,11 @@ Map<String, dynamic> createUserRecordData({
   String? address,
   String? password,
   String? email,
+  String? displayName,
+  String? photoUrl,
+  String? phoneNumber,
+  DateTime? createdTime,
+  String? uid,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -87,6 +122,11 @@ Map<String, dynamic> createUserRecordData({
       'Address': address,
       'Password': password,
       'email': email,
+      'display_name': displayName,
+      'photo_url': photoUrl,
+      'phone_number': phoneNumber,
+      'created_time': createdTime,
+      'uid': uid,
     }.withoutNulls,
   );
 
@@ -101,12 +141,26 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
     return e1?.name == e2?.name &&
         e1?.address == e2?.address &&
         e1?.password == e2?.password &&
-        e1?.email == e2?.email;
+        e1?.email == e2?.email &&
+        e1?.displayName == e2?.displayName &&
+        e1?.photoUrl == e2?.photoUrl &&
+        e1?.phoneNumber == e2?.phoneNumber &&
+        e1?.createdTime == e2?.createdTime &&
+        e1?.uid == e2?.uid;
   }
 
   @override
-  int hash(UserRecord? e) =>
-      const ListEquality().hash([e?.name, e?.address, e?.password, e?.email]);
+  int hash(UserRecord? e) => const ListEquality().hash([
+        e?.name,
+        e?.address,
+        e?.password,
+        e?.email,
+        e?.displayName,
+        e?.photoUrl,
+        e?.phoneNumber,
+        e?.createdTime,
+        e?.uid
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is UserRecord;

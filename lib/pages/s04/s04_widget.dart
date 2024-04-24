@@ -470,10 +470,7 @@ class _S04WidgetState extends State<S04Widget> with TickerProviderStateMixin {
                                                             .fromSTEB(0.0, 30.0,
                                                                 0.0, 20.0),
                                                     child: FFButtonWidget(
-                                                      onPressed: () {
-                                                        print(
-                                                            'Button pressed ...');
-                                                      },
+                                                      onPressed: () async {},
                                                       text: 'Book',
                                                       options: FFButtonOptions(
                                                         width: 320.0,

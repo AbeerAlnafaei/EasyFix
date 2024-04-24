@@ -31,21 +31,33 @@ class ReservationsRecord extends FirestoreRecord {
   bool hasDate() => _date != null;
 
   // "ServiceID" field.
-  String? _serviceID;
-  String get serviceID => _serviceID ?? '';
+  DocumentReference? _serviceID;
+  DocumentReference? get serviceID => _serviceID;
   bool hasServiceID() => _serviceID != null;
 
+  // "ServiceName" field.
+  String? _serviceName;
+  String get serviceName => _serviceName ?? '';
+  bool hasServiceName() => _serviceName != null;
+
+  // "Edit" field.
+  bool? _edit;
+  bool get edit => _edit ?? false;
+  bool hasEdit() => _edit != null;
+
   // "UserID" field.
-  String? _userID;
-  String get userID => _userID ?? '';
+  DocumentReference? _userID;
+  DocumentReference? get userID => _userID;
   bool hasUserID() => _userID != null;
 
   void _initializeFields() {
     _emergency = snapshotData['Emergency'] as bool?;
     _status = snapshotData['Status'] as String?;
     _date = snapshotData['Date'] as DateTime?;
-    _serviceID = snapshotData['ServiceID'] as String?;
-    _userID = snapshotData['UserID'] as String?;
+    _serviceID = snapshotData['ServiceID'] as DocumentReference?;
+    _serviceName = snapshotData['ServiceName'] as String?;
+    _edit = snapshotData['Edit'] as bool?;
+    _userID = snapshotData['UserID'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -86,8 +98,10 @@ Map<String, dynamic> createReservationsRecordData({
   bool? emergency,
   String? status,
   DateTime? date,
-  String? serviceID,
-  String? userID,
+  DocumentReference? serviceID,
+  String? serviceName,
+  bool? edit,
+  DocumentReference? userID,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -95,6 +109,8 @@ Map<String, dynamic> createReservationsRecordData({
       'Status': status,
       'Date': date,
       'ServiceID': serviceID,
+      'ServiceName': serviceName,
+      'Edit': edit,
       'UserID': userID,
     }.withoutNulls,
   );
@@ -112,12 +128,21 @@ class ReservationsRecordDocumentEquality
         e1?.status == e2?.status &&
         e1?.date == e2?.date &&
         e1?.serviceID == e2?.serviceID &&
+        e1?.serviceName == e2?.serviceName &&
+        e1?.edit == e2?.edit &&
         e1?.userID == e2?.userID;
   }
 
   @override
-  int hash(ReservationsRecord? e) => const ListEquality()
-      .hash([e?.emergency, e?.status, e?.date, e?.serviceID, e?.userID]);
+  int hash(ReservationsRecord? e) => const ListEquality().hash([
+        e?.emergency,
+        e?.status,
+        e?.date,
+        e?.serviceID,
+        e?.serviceName,
+        e?.edit,
+        e?.userID
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is ReservationsRecord;

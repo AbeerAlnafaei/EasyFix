@@ -129,9 +129,7 @@ class _ReschedulUrgentWidgetState extends State<ReschedulUrgentWidget>
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed('rescheduleCalender');
-                    },
+                    onPressed: () async {},
                     text: 'Schedule a date',
                     options: FFButtonOptions(
                       width: 300.0,
@@ -180,9 +178,7 @@ class _ReschedulUrgentWidgetState extends State<ReschedulUrgentWidget>
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed('ReservationsCopyCopy');
-                    },
+                    onPressed: () async {},
                     text: 'Urgent Booking',
                     options: FFButtonOptions(
                       width: 300.0,

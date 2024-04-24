@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 's05_model.dart';
 export 's05_model.dart';
@@ -26,6 +27,9 @@ class _S05WidgetState extends State<S05Widget> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _model = createModel(context, () => S05Model());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {});
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation': AnimationInfo(
@@ -470,10 +474,7 @@ class _S05WidgetState extends State<S05Widget> with TickerProviderStateMixin {
                                                             .fromSTEB(0.0, 30.0,
                                                                 0.0, 20.0),
                                                     child: FFButtonWidget(
-                                                      onPressed: () {
-                                                        print(
-                                                            'Button pressed ...');
-                                                      },
+                                                      onPressed: () async {},
                                                       text: 'Book',
                                                       options: FFButtonOptions(
                                                         width: 320.0,

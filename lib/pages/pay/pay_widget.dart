@@ -188,10 +188,10 @@ class _PayWidgetState extends State<PayWidget> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     FFButtonWidget(
-                      onPressed: () {
-                        print('Button pressed ...');
+                      onPressed: () async {
+                        context.pushNamed('Reservations');
                       },
-                      text: 'Go Home',
+                      text: 'Done',
                       options: FFButtonOptions(
                         width: 230.0,
                         height: 50.0,

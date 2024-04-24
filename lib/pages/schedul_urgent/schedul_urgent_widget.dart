@@ -9,7 +9,14 @@ import 'schedul_urgent_model.dart';
 export 'schedul_urgent_model.dart';
 
 class SchedulUrgentWidget extends StatefulWidget {
-  const SchedulUrgentWidget({super.key});
+  const SchedulUrgentWidget({
+    super.key,
+    required this.serviceid,
+    required this.uid,
+  });
+
+  final DocumentReference? serviceid;
+  final DocumentReference? uid;
 
   @override
   State<SchedulUrgentWidget> createState() => _SchedulUrgentWidgetState();
@@ -129,8 +136,20 @@ class _SchedulUrgentWidgetState extends State<SchedulUrgentWidget>
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      context.pushNamed(
+                        'Booking',
+                        queryParameters: {
+                          'userid': serializeParam(
+                            widget.uid,
+                            ParamType.DocumentReference,
+                          ),
+                          'sid': serializeParam(
+                            widget.serviceid,
+                            ParamType.DocumentReference,
+                          ),
+                        }.withoutNulls,
+                      );
                     },
                     text: 'Schedule a date',
                     options: FFButtonOptions(
@@ -180,8 +199,16 @@ class _SchedulUrgentWidgetState extends State<SchedulUrgentWidget>
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      context.pushNamed(
+                        'BookingUrgent',
+                        queryParameters: {
+                          'service': serializeParam(
+                            widget.serviceid,
+                            ParamType.DocumentReference,
+                          ),
+                        }.withoutNulls,
+                      );
                     },
                     text: 'Urgent Booking',
                     options: FFButtonOptions(

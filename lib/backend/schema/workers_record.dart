@@ -20,20 +20,20 @@ class WorkersRecord extends FirestoreRecord {
   String get name => _name ?? '';
   bool hasName() => _name != null;
 
-  // "ServiceID" field.
-  String? _serviceID;
-  String get serviceID => _serviceID ?? '';
-  bool hasServiceID() => _serviceID != null;
-
   // "Experience" field.
   String? _experience;
   String get experience => _experience ?? '';
   bool hasExperience() => _experience != null;
 
+  // "ServiceID" field.
+  DocumentReference? _serviceID;
+  DocumentReference? get serviceID => _serviceID;
+  bool hasServiceID() => _serviceID != null;
+
   void _initializeFields() {
     _name = snapshotData['Name'] as String?;
-    _serviceID = snapshotData['ServiceID'] as String?;
     _experience = snapshotData['Experience'] as String?;
+    _serviceID = snapshotData['ServiceID'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -72,14 +72,14 @@ class WorkersRecord extends FirestoreRecord {
 
 Map<String, dynamic> createWorkersRecordData({
   String? name,
-  String? serviceID,
   String? experience,
+  DocumentReference? serviceID,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'Name': name,
-      'ServiceID': serviceID,
       'Experience': experience,
+      'ServiceID': serviceID,
     }.withoutNulls,
   );
 
@@ -92,13 +92,13 @@ class WorkersRecordDocumentEquality implements Equality<WorkersRecord> {
   @override
   bool equals(WorkersRecord? e1, WorkersRecord? e2) {
     return e1?.name == e2?.name &&
-        e1?.serviceID == e2?.serviceID &&
-        e1?.experience == e2?.experience;
+        e1?.experience == e2?.experience &&
+        e1?.serviceID == e2?.serviceID;
   }
 
   @override
   int hash(WorkersRecord? e) =>
-      const ListEquality().hash([e?.name, e?.serviceID, e?.experience]);
+      const ListEquality().hash([e?.name, e?.experience, e?.serviceID]);
 
   @override
   bool isValidKey(Object? o) => o is WorkersRecord;

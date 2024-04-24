@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'sign_model.dart';
@@ -355,6 +356,8 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                     autofillHints: const [
                                                       AutofillHints.email
                                                     ],
+                                                    textInputAction:
+                                                        TextInputAction.next,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
                                                       labelText: 'Email',
@@ -561,6 +564,8 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                     autofillHints: const [
                                                       AutofillHints.password
                                                     ],
+                                                    textInputAction:
+                                                        TextInputAction.next,
                                                     obscureText: !_model
                                                         .passwordCreateVisibility,
                                                     decoration: InputDecoration(
@@ -685,6 +690,8 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                     autofillHints: const [
                                                       AutofillHints.password
                                                     ],
+                                                    textInputAction:
+                                                        TextInputAction.done,
                                                     obscureText: !_model
                                                         .passwordConfirmVisibility,
                                                     decoration: InputDecoration(
@@ -803,112 +810,173 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                   padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 16.0),
-                                                  child: FFButtonWidget(
-                                                    onPressed: () async {
-                                                      GoRouter.of(context)
-                                                          .prepareAuthEvent();
-                                                      if (_model
-                                                              .passwordCreateTextController
-                                                              .text !=
-                                                          _model
-                                                              .passwordConfirmTextController
-                                                              .text) {
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                          const SnackBar(
-                                                            content: Text(
-                                                              'Passwords don\'t match!',
+                                                  child: StreamBuilder<
+                                                      List<UserRecord>>(
+                                                    stream: queryUserRecord(
+                                                      singleRecord: true,
+                                                    ),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              valueColor:
+                                                                  AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                              ),
                                                             ),
                                                           ),
                                                         );
-                                                        return;
                                                       }
-
-                                                      final user = await authManager
-                                                          .createAccountWithEmail(
-                                                        context,
-                                                        _model
-                                                            .emailCreateTextController
-                                                            .text,
-                                                        _model
-                                                            .passwordCreateTextController
-                                                            .text,
-                                                      );
-                                                      if (user == null) {
-                                                        return;
+                                                      List<UserRecord>
+                                                          buttonUserRecordList =
+                                                          snapshot.data!;
+                                                      // Return an empty Container when the item does not exist.
+                                                      if (snapshot
+                                                          .data!.isEmpty) {
+                                                        return Container();
                                                       }
-
-                                                      await UserRecord
-                                                          .collection
-                                                          .doc(user.uid)
-                                                          .update(
-                                                              createUserRecordData(
-                                                            name: _model
-                                                                .nameTextController
-                                                                .text,
-                                                            address: (_model
-                                                                        .addressCreateFocusNode
-                                                                        ?.hasFocus ??
-                                                                    false)
-                                                                .toString(),
-                                                            password: (_model
-                                                                        .passwordCreateFocusNode
-                                                                        ?.hasFocus ??
-                                                                    false)
-                                                                .toString(),
-                                                            email: (_model
-                                                                        .emailCreateFocusNode
-                                                                        ?.hasFocus ??
-                                                                    false)
-                                                                .toString(),
-                                                          ));
-
-                                                      context.pushNamedAuth(
-                                                          'HomePage',
-                                                          context.mounted);
-                                                    },
-                                                    text: 'Create Account',
-                                                    options: FFButtonOptions(
-                                                      width: 230.0,
-                                                      height: 52.0,
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      iconPadding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      color: const Color(0xFF395C7D),
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                color: Colors
-                                                                    .white,
-                                                                letterSpacing:
-                                                                    0.0,
+                                                      final buttonUserRecord =
+                                                          buttonUserRecordList
+                                                                  .isNotEmpty
+                                                              ? buttonUserRecordList
+                                                                  .first
+                                                              : null;
+                                                      return FFButtonWidget(
+                                                        onPressed: () async {
+                                                          GoRouter.of(context)
+                                                              .prepareAuthEvent();
+                                                          if (_model
+                                                                  .passwordCreateTextController
+                                                                  .text !=
+                                                              _model
+                                                                  .passwordConfirmTextController
+                                                                  .text) {
+                                                            ScaffoldMessenger
+                                                                    .of(context)
+                                                                .showSnackBar(
+                                                              const SnackBar(
+                                                                content: Text(
+                                                                  'Passwords don\'t match!',
+                                                                ),
                                                               ),
-                                                      elevation: 3.0,
-                                                      borderSide: const BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                        width: 1.0,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              40.0),
-                                                    ),
+                                                            );
+                                                            return;
+                                                          }
+
+                                                          final user =
+                                                              await authManager
+                                                                  .createAccountWithEmail(
+                                                            context,
+                                                            _model
+                                                                .emailCreateTextController
+                                                                .text,
+                                                            _model
+                                                                .passwordCreateTextController
+                                                                .text,
+                                                          );
+                                                          if (user == null) {
+                                                            return;
+                                                          }
+
+                                                          await UserRecord
+                                                              .collection
+                                                              .doc(user.uid)
+                                                              .update(
+                                                                  createUserRecordData(
+                                                                name: _model
+                                                                    .nameTextController
+                                                                    .text,
+                                                                address: _model
+                                                                    .addressCreateTextController
+                                                                    .text,
+                                                                password: _model
+                                                                    .passwordCreateTextController
+                                                                    .text,
+                                                                email:
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                  _model
+                                                                      .emailCreateTextController
+                                                                      .text,
+                                                                  'Exapmle@gmail.com',
+                                                                ),
+                                                              ));
+
+                                                          context.pushNamedAuth(
+                                                            'HomePage',
+                                                            context.mounted,
+                                                            queryParameters: {
+                                                              'userid':
+                                                                  serializeParam(
+                                                                buttonUserRecord
+                                                                    ?.reference,
+                                                                ParamType
+                                                                    .DocumentReference,
+                                                              ),
+                                                            }.withoutNulls,
+                                                          );
+
+                                                          await queryUserRecordOnce(
+                                                            singleRecord: true,
+                                                          ).then((s) =>
+                                                              s.firstOrNull);
+                                                        },
+                                                        text: 'Create Account',
+                                                        options:
+                                                            FFButtonOptions(
+                                                          width: 230.0,
+                                                          height: 52.0,
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          iconPadding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          color:
+                                                              const Color(0xFF395C7D),
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Readex Pro',
+                                                                    color: Colors
+                                                                        .white,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                  ),
+                                                          elevation: 3.0,
+                                                          borderSide:
+                                                              const BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 1.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      40.0),
+                                                        ),
+                                                      );
+                                                    },
                                                   ),
                                                 ),
                                               ),

@@ -9,7 +9,14 @@ import 's01_model.dart';
 export 's01_model.dart';
 
 class S01Widget extends StatefulWidget {
-  const S01Widget({super.key});
+  const S01Widget({
+    super.key,
+    this.uid,
+    this.service,
+  });
+
+  final DocumentReference? uid;
+  final DocumentReference? service;
 
   @override
   State<S01Widget> createState() => _S01WidgetState();
@@ -463,9 +470,23 @@ class _S01WidgetState extends State<S01Widget> with TickerProviderStateMixin {
                                                       .fromSTEB(
                                                           0.0, 30.0, 0.0, 20.0),
                                                   child: FFButtonWidget(
-                                                    onPressed: () {
-                                                      print(
-                                                          'Button pressed ...');
+                                                    onPressed: () async {
+                                                      context.pushNamed(
+                                                        'Schedul-urgent',
+                                                        queryParameters: {
+                                                          'uid': serializeParam(
+                                                            widget.uid,
+                                                            ParamType
+                                                                .DocumentReference,
+                                                          ),
+                                                          'serviceid':
+                                                              serializeParam(
+                                                            widget.service,
+                                                            ParamType
+                                                                .DocumentReference,
+                                                          ),
+                                                        }.withoutNulls,
+                                                      );
                                                     },
                                                     text: 'Book',
                                                     options: FFButtonOptions(

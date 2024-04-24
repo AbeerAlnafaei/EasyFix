@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -104,16 +105,18 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 12.0),
-                child: Text(
-                  'Ahmad A.',
-                  textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).headlineSmall.override(
-                        fontFamily: 'Plus Jakarta Sans',
-                        color: Colors.white,
-                        fontSize: 22.0,
-                        letterSpacing: 0.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                child: AuthUserStreamWidget(
+                  builder: (context) => Text(
+                    valueOrDefault(currentUserDocument?.name, ''),
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                          fontFamily: 'Plus Jakarta Sans',
+                          color: Colors.white,
+                          fontSize: 22.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
                 ),
               ),
               Expanded(
@@ -427,43 +430,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 ) ??
                                                 false;
                                         if (confirmDialogResponse) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Yes',
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                              ),
-                                              duration:
-                                                  const Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
-                                          );
+                                          context.pushNamed('mainpage');
                                         } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'No',
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                              ),
-                                              duration:
-                                                  const Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
-                                          );
+                                          context.pushNamed('Profile');
                                         }
                                       },
                                       child: Text(

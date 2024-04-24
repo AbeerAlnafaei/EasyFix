@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/upload_data.dart';
@@ -6,7 +7,12 @@ import 'home_page_model.dart';
 export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+  const HomePageWidget({
+    super.key,
+    this.userid,
+  });
+
+  final DocumentReference? userid;
 
   @override
   State<HomePageWidget> createState() => _HomePageWidgetState();
@@ -94,18 +100,40 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   2.0, 0.0, 0.0, 0.0),
-                              child: Text(
-                                'Ahmad',
-                                style: FlutterFlowTheme.of(context)
-                                    .displaySmall
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      fontSize: 32.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                              child: StreamBuilder<UserRecord>(
+                                stream: UserRecord.getDocument(widget.userid!),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                            FlutterFlowTheme.of(context)
+                                                .primary,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  final usernameUserRecord = snapshot.data!;
+                                  return Text(
+                                    usernameUserRecord.name,
+                                    style: FlutterFlowTheme.of(context)
+                                        .displaySmall
+                                        .override(
+                                          fontFamily: 'Outfit',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          fontSize: 32.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                  );
+                                },
                               ),
                             ),
                           ],
@@ -177,887 +205,335 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 20.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 10.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 170.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(24.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).secondaryText,
+                child: StreamBuilder<List<ServicesRecord>>(
+                  stream: queryServicesRecord(),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
                           ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    final selectedMedia = await selectMedia(
-                                      maxWidth: 200.00,
-                                      maxHeight: 100.00,
-                                      mediaSource: MediaSource.photoGallery,
-                                      multiImage: false,
-                                    );
-                                    if (selectedMedia != null &&
-                                        selectedMedia.every((m) =>
-                                            validateFileFormat(
-                                                m.storagePath, context))) {
-                                      setState(
-                                          () => _model.isDataUploading = true);
-                                      var selectedUploadedFiles =
-                                          <FFUploadedFile>[];
-
-                                      try {
-                                        selectedUploadedFiles = selectedMedia
-                                            .map((m) => FFUploadedFile(
-                                                  name: m.storagePath
-                                                      .split('/')
-                                                      .last,
-                                                  bytes: m.bytes,
-                                                  height: m.dimensions?.height,
-                                                  width: m.dimensions?.width,
-                                                  blurHash: m.blurHash,
-                                                ))
-                                            .toList();
-                                      } finally {
-                                        _model.isDataUploading = false;
-                                      }
-                                      if (selectedUploadedFiles.length ==
-                                          selectedMedia.length) {
-                                        setState(() {
-                                          _model.uploadedLocalFile =
-                                              selectedUploadedFiles.first;
-                                        });
-                                      } else {
-                                        setState(() {});
-                                        return;
-                                      }
-                                    }
-                                  },
-                                  child: ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(0.0),
-                                      bottomRight: Radius.circular(0.0),
-                                      topLeft: Radius.circular(30.0),
-                                      topRight: Radius.circular(30.0),
-                                    ),
-                                    child: Image.asset(
-                                      'assets/images/plumbing1.jpg',
-                                      width: 348.0,
-                                      height: 98.0,
-                                      fit: BoxFit.fill,
-                                      alignment: const Alignment(0.0, 0.0),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 1.0),
-                                child: Container(
-                                  width: 348.0,
-                                  height: 45.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        blurRadius: 4.0,
-                                        color: Color(0x33000000),
-                                        offset: Offset(
-                                          0.0,
-                                          2.0,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(30.0),
-                                      topLeft: Radius.circular(0.0),
-                                      topRight: Radius.circular(0.0),
-                                    ),
-                                    shape: BoxShape.rectangle,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          child: Align(
-                                            alignment:
-                                                const AlignmentDirectional(-1.0, 1.0),
-                                            child: Text(
-                                              'Plumbing',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 16.0,
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
-                                          child: Icon(
-                                            Icons.star,
-                                            color: FlutterFlowTheme.of(context)
-                                                .warning,
-                                            size: 20.0,
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
-                                          child: Text(
-                                            '4.9',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(1.0, -1.0),
-                                          child: Icon(
-                                            Icons.chevron_right_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 30.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 10.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 170.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(24.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(0.0),
-                                    bottomRight: Radius.circular(0.0),
-                                    topLeft: Radius.circular(30.0),
-                                    topRight: Radius.circular(30.0),
-                                  ),
-                                  child: Image.asset(
-                                    'assets/images/painting1.jpg',
-                                    width: 348.0,
-                                    height: 98.0,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 1.0),
-                                child: Container(
-                                  width: 348.0,
-                                  height: 45.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        blurRadius: 4.0,
-                                        color: Color(0x33000000),
-                                        offset: Offset(
-                                          0.0,
-                                          2.0,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(30.0),
-                                      topLeft: Radius.circular(0.0),
-                                      topRight: Radius.circular(0.0),
-                                    ),
-                                    shape: BoxShape.rectangle,
-                                  ),
-                                  child: Align(
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          Expanded(
-                                            child: Align(
-                                              alignment: const AlignmentDirectional(
-                                                  -1.0, 1.0),
-                                              child: Text(
-                                                'Painting ',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      fontSize: 16.0,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                              ),
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment:
-                                                const AlignmentDirectional(0.0, 1.0),
-                                            child: Icon(
-                                              Icons.star,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .warning,
-                                              size: 20.0,
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment:
-                                                const AlignmentDirectional(0.0, 1.0),
-                                            child: Text(
-                                              '4.8',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment:
-                                                const AlignmentDirectional(1.0, -1.0),
-                                            child: Icon(
-                                              Icons.chevron_right_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              size: 30.0,
-                                            ),
-                                          ),
-                                        ],
+                      );
+                    }
+                    List<ServicesRecord> columnServicesRecordList =
+                        snapshot.data!;
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: List.generate(columnServicesRecordList.length,
+                          (columnIndex) {
+                        final columnServicesRecord =
+                            columnServicesRecordList[columnIndex];
+                        return Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              20.0, 0.0, 20.0, 10.0),
+                          child: StreamBuilder<UserRecord>(
+                            stream: UserRecord.getDocument(widget.userid!),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 10.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 170.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(24.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(0.0),
-                                    bottomRight: Radius.circular(0.0),
-                                    topLeft: Radius.circular(30.0),
-                                    topRight: Radius.circular(30.0),
-                                  ),
-                                  child: Image.asset(
-                                    'assets/images/appliance1.jpg',
-                                    width: 348.0,
-                                    height: 98.0,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 1.0),
+                                );
+                              }
+                              final containerUserRecord = snapshot.data!;
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed(
+                                    'S01Copy',
+                                    queryParameters: {
+                                      'user': serializeParam(
+                                        containerUserRecord.reference,
+                                        ParamType.DocumentReference,
+                                      ),
+                                      'service': serializeParam(
+                                        columnServicesRecord.reference,
+                                        ParamType.DocumentReference,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                },
                                 child: Container(
-                                  width: 348.0,
-                                  height: 45.0,
+                                  width: double.infinity,
+                                  height: 170.0,
                                   decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        blurRadius: 4.0,
-                                        color: Color(0x33000000),
-                                        offset: Offset(
-                                          0.0,
-                                          2.0,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(30.0),
-                                      topLeft: Radius.circular(0.0),
-                                      topRight: Radius.circular(0.0),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(24.0),
+                                    border: Border.all(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
                                     ),
-                                    shape: BoxShape.rectangle,
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(12.0),
-                                    child: Row(
+                                    child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Expanded(
-                                          child: Align(
-                                            alignment:
-                                                const AlignmentDirectional(-1.0, 1.0),
-                                            child: Text(
-                                              'Appliance Repair ',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 16.0,
-                                                    letterSpacing: 0.0,
-                                                  ),
+                                        Align(
+                                          alignment:
+                                              const AlignmentDirectional(0.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              final selectedMedia =
+                                                  await selectMedia(
+                                                maxWidth: 200.00,
+                                                maxHeight: 100.00,
+                                                mediaSource:
+                                                    MediaSource.photoGallery,
+                                                multiImage: false,
+                                              );
+                                              if (selectedMedia != null &&
+                                                  selectedMedia.every((m) =>
+                                                      validateFileFormat(
+                                                          m.storagePath,
+                                                          context))) {
+                                                setState(() => _model
+                                                    .isDataUploading1 = true);
+                                                var selectedUploadedFiles =
+                                                    <FFUploadedFile>[];
+
+                                                try {
+                                                  selectedUploadedFiles =
+                                                      selectedMedia
+                                                          .map((m) =>
+                                                              FFUploadedFile(
+                                                                name: m
+                                                                    .storagePath
+                                                                    .split('/')
+                                                                    .last,
+                                                                bytes: m.bytes,
+                                                                height: m
+                                                                    .dimensions
+                                                                    ?.height,
+                                                                width: m
+                                                                    .dimensions
+                                                                    ?.width,
+                                                                blurHash:
+                                                                    m.blurHash,
+                                                              ))
+                                                          .toList();
+                                                } finally {
+                                                  _model.isDataUploading1 =
+                                                      false;
+                                                }
+                                                if (selectedUploadedFiles
+                                                        .length ==
+                                                    selectedMedia.length) {
+                                                  setState(() {
+                                                    _model.uploadedLocalFile1 =
+                                                        selectedUploadedFiles
+                                                            .first;
+                                                  });
+                                                } else {
+                                                  setState(() {});
+                                                  return;
+                                                }
+                                              }
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius: const BorderRadius.only(
+                                                bottomLeft:
+                                                    Radius.circular(0.0),
+                                                bottomRight:
+                                                    Radius.circular(0.0),
+                                                topLeft: Radius.circular(30.0),
+                                                topRight: Radius.circular(30.0),
+                                              ),
+                                              child: Image.asset(
+                                                'assets/images/plumbing1.jpg',
+                                                width: 348.0,
+                                                height: 98.0,
+                                                fit: BoxFit.fill,
+                                                alignment: const Alignment(0.0, 0.0),
+                                              ),
                                             ),
                                           ),
                                         ),
                                         Align(
                                           alignment:
                                               const AlignmentDirectional(0.0, 1.0),
-                                          child: Icon(
-                                            Icons.star,
-                                            color: FlutterFlowTheme.of(context)
-                                                .warning,
-                                            size: 20.0,
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
-                                          child: Text(
-                                            '4.7',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(1.0, -1.0),
-                                          child: Icon(
-                                            Icons.chevron_right_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 30.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 10.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 170.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(24.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(0.0),
-                                    bottomRight: Radius.circular(0.0),
-                                    topLeft: Radius.circular(30.0),
-                                    topRight: Radius.circular(30.0),
-                                  ),
-                                  child: Image.asset(
-                                    'assets/images/Electrical1.jpg',
-                                    width: 348.0,
-                                    height: 98.0,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 1.0),
-                                child: Container(
-                                  width: 348.0,
-                                  height: 45.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        blurRadius: 4.0,
-                                        color: Color(0x33000000),
-                                        offset: Offset(
-                                          0.0,
-                                          2.0,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(30.0),
-                                      topLeft: Radius.circular(0.0),
-                                      topRight: Radius.circular(0.0),
-                                    ),
-                                    shape: BoxShape.rectangle,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          child: Align(
-                                            alignment:
-                                                const AlignmentDirectional(-1.0, 1.0),
-                                            child: Text(
-                                              'Electricity ',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 16.0,
-                                                    letterSpacing: 0.0,
+                                          child: Container(
+                                            width: 348.0,
+                                            height: 45.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              boxShadow: const [
+                                                BoxShadow(
+                                                  blurRadius: 4.0,
+                                                  color: Color(0x33000000),
+                                                  offset: Offset(
+                                                    0.0,
+                                                    2.0,
                                                   ),
+                                                )
+                                              ],
+                                              borderRadius: const BorderRadius.only(
+                                                bottomLeft:
+                                                    Radius.circular(20.0),
+                                                bottomRight:
+                                                    Radius.circular(30.0),
+                                                topLeft: Radius.circular(0.0),
+                                                topRight: Radius.circular(0.0),
+                                              ),
+                                              shape: BoxShape.rectangle,
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(12.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Expanded(
+                                                    child: Align(
+                                                      alignment:
+                                                          const AlignmentDirectional(
+                                                              -1.0, 1.0),
+                                                      child: Text(
+                                                        columnServicesRecord
+                                                            .serviceName,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            0.0, 1.0),
+                                                    child: Icon(
+                                                      Icons.star,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .warning,
+                                                      size: 20.0,
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            0.0, 1.0),
+                                                    child: Text(
+                                                      '4.9',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Readex Pro',
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            1.0, -1.0),
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        context.pushNamed(
+                                                          'S01',
+                                                          queryParameters: {
+                                                            'uid':
+                                                                serializeParam(
+                                                              containerUserRecord
+                                                                  .reference,
+                                                              ParamType
+                                                                  .DocumentReference,
+                                                            ),
+                                                            'service':
+                                                                serializeParam(
+                                                              columnServicesRecord
+                                                                  .reference,
+                                                              ParamType
+                                                                  .DocumentReference,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
+                                                      },
+                                                      child: Icon(
+                                                        Icons
+                                                            .chevron_right_rounded,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        size: 30.0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
-                                          child: Icon(
-                                            Icons.star,
-                                            color: FlutterFlowTheme.of(context)
-                                                .warning,
-                                            size: 20.0,
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
-                                          child: Text(
-                                            '4.9',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(1.0, -1.0),
-                                          child: Icon(
-                                            Icons.chevron_right_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 30.0,
-                                          ),
-                                        ),
                                       ],
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              );
+                            },
                           ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 10.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 170.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(24.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(0.0),
-                                    bottomRight: Radius.circular(0.0),
-                                    topLeft: Radius.circular(30.0),
-                                    topRight: Radius.circular(30.0),
-                                  ),
-                                  child: Image.asset(
-                                    'assets/images/AC1.jpg',
-                                    width: 348.0,
-                                    height: 98.0,
-                                    fit: BoxFit.fill,
-                                    alignment: const Alignment(0.0, -1.0),
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 1.0),
-                                child: Container(
-                                  width: 348.0,
-                                  height: 45.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        blurRadius: 4.0,
-                                        color: Color(0x33000000),
-                                        offset: Offset(
-                                          0.0,
-                                          2.0,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(30.0),
-                                      topLeft: Radius.circular(0.0),
-                                      topRight: Radius.circular(0.0),
-                                    ),
-                                    shape: BoxShape.rectangle,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          child: Align(
-                                            alignment:
-                                                const AlignmentDirectional(-1.0, 1.0),
-                                            child: Text(
-                                              'AC',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 16.0,
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
-                                          child: Icon(
-                                            Icons.star,
-                                            color: FlutterFlowTheme.of(context)
-                                                .warning,
-                                            size: 20.0,
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
-                                          child: Text(
-                                            '5.0',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(1.0, -1.0),
-                                          child: Icon(
-                                            Icons.chevron_right_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 30.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 10.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 170.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(24.0),
-                          border: Border.all(
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.only(
-                                    bottomLeft: Radius.circular(0.0),
-                                    bottomRight: Radius.circular(0.0),
-                                    topLeft: Radius.circular(30.0),
-                                    topRight: Radius.circular(30.0),
-                                  ),
-                                  child: Image.asset(
-                                    'assets/images/Pest1.jpg',
-                                    width: 348.0,
-                                    height: 98.0,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                              Align(
-                                alignment: const AlignmentDirectional(0.0, 1.0),
-                                child: Container(
-                                  width: 348.0,
-                                  height: 45.0,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).alternate,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        blurRadius: 4.0,
-                                        color: Color(0x33000000),
-                                        offset: Offset(
-                                          0.0,
-                                          2.0,
-                                        ),
-                                      )
-                                    ],
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(30.0),
-                                      topLeft: Radius.circular(0.0),
-                                      topRight: Radius.circular(0.0),
-                                    ),
-                                    shape: BoxShape.rectangle,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          child: Align(
-                                            alignment:
-                                                const AlignmentDirectional(-1.0, 1.0),
-                                            child: Text(
-                                              'Pest Control',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                    fontSize: 16.0,
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
-                                          child: Icon(
-                                            Icons.star,
-                                            color: FlutterFlowTheme.of(context)
-                                                .warning,
-                                            size: 20.0,
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
-                                          child: Text(
-                                            '4.7',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(1.0, -1.0),
-                                          child: Icon(
-                                            Icons.chevron_right_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 30.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                        );
+                      }),
+                    );
+                  },
                 ),
               ),
             ],

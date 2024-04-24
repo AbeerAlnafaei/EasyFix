@@ -1,14 +1,11 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'reservations_copy_copy_widget.dart' show ReservationsCopyCopyWidget;
+import 's01_copy_widget.dart' show S01CopyWidget;
 import 'package:flutter/material.dart';
 
-class ReservationsCopyCopyModel
-    extends FlutterFlowModel<ReservationsCopyCopyWidget> {
+class S01CopyModel extends FlutterFlowModel<S01CopyWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  DateTime? datePicked1;
-  DateTime? datePicked2;
 
   @override
   void initState(BuildContext context) {}

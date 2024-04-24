@@ -44,6 +44,15 @@ class _ReservationsWidgetState extends State<ReservationsWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(5.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).secondaryText,
+            automaticallyImplyLeading: false,
+            actions: const [],
+            elevation: 2.0,
+          ),
+        ),
         body: SafeArea(
           top: true,
           child: Row(
@@ -198,83 +207,62 @@ class _ReservationsWidgetState extends State<ReservationsWidget> {
                                               _model.fieldSearchTextController
                                                   .text,
                                               listViewReservationsRecord
-                                                  .reference.id) ??
+                                                  .serviceName) ??
                                           true,
-                                      child: StreamBuilder<
-                                          List<ReservationsRecord>>(
-                                        stream: queryReservationsRecord(
-                                          queryBuilder: (reservationsRecord) =>
-                                              reservationsRecord.where(
-                                            'ServiceID',
-                                            isEqualTo:
-                                                listViewReservationsRecord
-                                                    .reference.id,
-                                          ),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation<
-                                                          Color>(
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                  ),
-                                                ),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            'ReservationDetails',
+                                            queryParameters: {
+                                              'reservation': serializeParam(
+                                                listViewReservationsRecord,
+                                                ParamType.Document,
                                               ),
-                                            );
-                                          }
-                                          List<ReservationsRecord>
-                                              listTileReservationsRecordList =
-                                              snapshot.data!;
-                                          return ListTile(
-                                            title: Text(
-                                              listViewReservationsRecord
-                                                          .serviceID ==
-                                                      'S01'
-                                                  ? 'Pluming'
-                                                  : 'j',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleLarge
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            subtitle: Text(
-                                              dateTimeFormat(
-                                                  'd/M h:mm a',
-                                                  listViewReservationsRecord
-                                                      .date!),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                            trailing: Icon(
-                                              Icons.arrow_forward_ios,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              size: 20.0,
-                                            ),
-                                            tileColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .secondaryBackground,
-                                            dense: false,
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'reservation':
+                                                  listViewReservationsRecord,
+                                            },
                                           );
                                         },
+                                        child: ListTile(
+                                          title: Text(
+                                            listViewReservationsRecord
+                                                .serviceName,
+                                            style: FlutterFlowTheme.of(context)
+                                                .titleLarge
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                          subtitle: Text(
+                                            dateTimeFormat(
+                                                'd/M h:mm a',
+                                                listViewReservationsRecord
+                                                    .date!),
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                          trailing: Icon(
+                                            Icons.arrow_forward_ios,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 20.0,
+                                          ),
+                                          tileColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          dense: false,
+                                        ),
                                       ),
                                     );
                                   },

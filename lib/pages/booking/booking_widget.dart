@@ -1,4 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -13,7 +12,14 @@ import 'booking_model.dart';
 export 'booking_model.dart';
 
 class BookingWidget extends StatefulWidget {
-  const BookingWidget({super.key});
+  const BookingWidget({
+    super.key,
+    required this.sid,
+    required this.userid,
+  });
+
+  final DocumentReference? sid;
+  final DocumentReference? userid;
 
   @override
   State<BookingWidget> createState() => _BookingWidgetState();
@@ -240,7 +246,7 @@ class _BookingWidgetState extends State<BookingWidget>
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, -0.45),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 305.0, 0.0, 0.0),
@@ -279,7 +285,7 @@ class _BookingWidgetState extends State<BookingWidget>
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'Book Now',
+                                                    'Book details',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyMedium
@@ -448,7 +454,7 @@ class _BookingWidgetState extends State<BookingWidget>
                                                                               CrossAxisAlignment.center,
                                                                           children: [
                                                                             Text(
-                                                                              dateTimeFormat('EEEE', _model.datePicked),
+                                                                              dateTimeFormat('EEEE', random_data.randomDate()),
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Readex Pro',
                                                                                     letterSpacing: 0.0,
@@ -503,9 +509,9 @@ class _BookingWidgetState extends State<BookingWidget>
                                                                         context:
                                                                             context,
                                                                         initialDate:
-                                                                            getCurrentTimestamp,
+                                                                            DateTime.fromMicrosecondsSinceEpoch(1714338000000000),
                                                                         firstDate:
-                                                                            getCurrentTimestamp,
+                                                                            DateTime.fromMicrosecondsSinceEpoch(1714338000000000),
                                                                         lastDate:
                                                                             DateTime(2050),
                                                                         builder:
@@ -548,7 +554,7 @@ class _BookingWidgetState extends State<BookingWidget>
                                                                           context:
                                                                               context,
                                                                           initialTime:
-                                                                              TimeOfDay.fromDateTime(getCurrentTimestamp),
+                                                                              TimeOfDay.fromDateTime(DateTime.fromMicrosecondsSinceEpoch(1714338000000000)),
                                                                           builder:
                                                                               (context, child) {
                                                                             return wrapInMaterialTimePickerTheme(
@@ -693,84 +699,88 @@ class _BookingWidgetState extends State<BookingWidget>
                                                                   30.0,
                                                                   0.0,
                                                                   20.0),
-                                                      child: FFButtonWidget(
-                                                        onPressed: () async {
-                                                          await ReservationsRecord
-                                                              .collection
-                                                              .doc()
-                                                              .set(
-                                                                  createReservationsRecordData(
-                                                                emergency:
-                                                                    false,
-                                                                status: random_data
-                                                                    .randomString(
-                                                                  1,
-                                                                  50,
-                                                                  true,
-                                                                  true,
-                                                                  false,
-                                                                ),
-                                                                date: _model
-                                                                    .datePicked,
-                                                                serviceID:
-                                                                    random_data
-                                                                        .randomString(
-                                                                  1,
-                                                                  20,
-                                                                  true,
-                                                                  true,
-                                                                  true,
-                                                                ),
-                                                                userID:
-                                                                    currentUserUid,
-                                                              ));
-                                                        },
-                                                        text: 'Pay',
-                                                        options:
-                                                            FFButtonOptions(
-                                                          width: 320.0,
-                                                          height: 50.0,
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          iconPadding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          color:
-                                                              const Color(0xFF395C7D),
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleSmall
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Lexend Deca',
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        16.0,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .normal,
+                                                      child: StreamBuilder<
+                                                          ServicesRecord>(
+                                                        stream: ServicesRecord
+                                                            .getDocument(
+                                                                widget.sid!),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          // Customize what your widget looks like when it's loading.
+                                                          if (!snapshot
+                                                              .hasData) {
+                                                            return Center(
+                                                              child: SizedBox(
+                                                                width: 50.0,
+                                                                height: 50.0,
+                                                                child:
+                                                                    CircularProgressIndicator(
+                                                                  valueColor:
+                                                                      AlwaysStoppedAnimation<
+                                                                          Color>(
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
                                                                   ),
-                                                          elevation: 2.0,
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 1.0,
-                                                          ),
-                                                        ),
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }
+                                                          final buttonServicesRecord =
+                                                              snapshot.data!;
+                                                          return FFButtonWidget(
+                                                            onPressed:
+                                                                () async {
+                                                              context.pushNamed(
+                                                                  'pay');
+                                                            },
+                                                            text: 'Pay',
+                                                            options:
+                                                                FFButtonOptions(
+                                                              width: 320.0,
+                                                              height: 50.0,
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              iconPadding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              color: const Color(
+                                                                  0xFF395C7D),
+                                                              textStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Lexend Deca',
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontSize:
+                                                                            16.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.normal,
+                                                                      ),
+                                                              elevation: 2.0,
+                                                              borderSide:
+                                                                  const BorderSide(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
                                                       ),
                                                     ),
                                                   ),

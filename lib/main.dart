@@ -120,11 +120,9 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'HomePage': const HomePageWidget(),
       'Reservations': const ReservationsWidget(),
       'Profile': const ProfileWidget(),
-      'ReservationsCopy': const ReservationsCopyWidget(),
-      'ReservationsCopyCopy': const ReservationsCopyCopyWidget(),
+      'HomePage': const HomePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -149,11 +147,6 @@ class _NavBarPageState extends State<NavBarPage> {
         haptic: false,
         tabs: const [
           GButton(
-            icon: Icons.home,
-            text: 'Home',
-            iconSize: 30.0,
-          ),
-          GButton(
             icon: Icons.bookmark_outlined,
             text: 'Reservations',
             iconSize: 30.0,
@@ -164,13 +157,8 @@ class _NavBarPageState extends State<NavBarPage> {
             iconSize: 30.0,
           ),
           GButton(
-            icon: Icons.bookmark_outlined,
-            text: 'Reservations',
-            iconSize: 30.0,
-          ),
-          GButton(
-            icon: Icons.bookmark_outlined,
-            text: 'Reservations',
+            icon: Icons.home,
+            text: 'Home',
             iconSize: 30.0,
           )
         ],

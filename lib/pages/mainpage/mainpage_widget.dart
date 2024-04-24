@@ -143,8 +143,8 @@ class _MainpageWidgetState extends State<MainpageWidget> {
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            context.pushNamed('Sign');
                           },
                           text: 'Create Account',
                           options: FFButtonOptions(
@@ -189,8 +189,8 @@ class _MainpageWidgetState extends State<MainpageWidget> {
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                         child: FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            context.pushNamed('LogIn');
                           },
                           text: 'Login',
                           options: FFButtonOptions(

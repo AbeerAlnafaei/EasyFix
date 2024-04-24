@@ -74,13 +74,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const ReservationsWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const SignWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const ReservationsWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const SignWidget(),
         ),
         FFRoute(
           name: 'Profile',
@@ -91,22 +91,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   initialPage: 'Profile',
                   page: ProfileWidget(),
                 ),
-        ),
-        FFRoute(
-          name: 'calender',
-          path: '/calender',
-          builder: (context, params) => const NavBarPage(
-            initialPage: '',
-            page: CalenderWidget(),
-          ),
-        ),
-        FFRoute(
-          name: 'BookingS01',
-          path: '/bookingS01',
-          builder: (context, params) => const NavBarPage(
-            initialPage: '',
-            page: BookingS01Widget(),
-          ),
         ),
         FFRoute(
           name: 'pay',
@@ -131,22 +115,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/reservations',
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'Reservations')
-              : const ReservationsWidget(),
+              : const NavBarPage(
+                  initialPage: 'Reservations',
+                  page: ReservationsWidget(),
+                ),
         ),
         FFRoute(
           name: 'S01',
           path: '/s01',
-          builder: (context, params) => const NavBarPage(
+          builder: (context, params) => NavBarPage(
             initialPage: '',
-            page: S01Widget(),
+            page: S01Widget(
+              uid: params.getParam(
+                'uid',
+                ParamType.DocumentReference,
+                false,
+                ['User'],
+              ),
+              service: params.getParam(
+                'service',
+                ParamType.DocumentReference,
+                false,
+                ['Services'],
+              ),
+            ),
           ),
-        ),
-        FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'HomePage')
-              : const HomePageWidget(),
         ),
         FFRoute(
           name: 'LogIn',
@@ -156,9 +149,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'S02',
           path: '/s02',
-          builder: (context, params) => const NavBarPage(
+          builder: (context, params) => NavBarPage(
             initialPage: '',
-            page: S02Widget(),
+            page: S02Widget(
+              service: params.getParam(
+                'service',
+                ParamType.DocumentReference,
+                false,
+                ['Services'],
+              ),
+            ),
           ),
         ),
         FFRoute(
@@ -196,49 +196,44 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'BookingUrgent',
           path: '/bookingUrgent',
-          builder: (context, params) => const NavBarPage(
-            initialPage: '',
-            page: BookingUrgentWidget(),
-          ),
-        ),
-        FFRoute(
-          name: 'Schedul-urgent',
-          path: '/schedulUrgent',
-          builder: (context, params) => const NavBarPage(
-            initialPage: '',
-            page: SchedulUrgentWidget(),
-          ),
-        ),
-        FFRoute(
-          name: 'rescheduleCalender',
-          path: '/rescheduleCalender',
-          asyncParams: {
-            'reservation1':
-                getDoc(['Reservations'], ReservationsRecord.fromSnapshot),
-          },
           builder: (context, params) => NavBarPage(
             initialPage: '',
-            page: RescheduleCalenderWidget(
-              reservation1: params.getParam(
-                'reservation1',
-                ParamType.Document,
+            page: BookingUrgentWidget(
+              service: params.getParam(
+                'service',
+                ParamType.DocumentReference,
+                false,
+                ['Services'],
+              ),
+              userid: params.getParam(
+                'userid',
+                ParamType.DocumentReference,
+                false,
+                ['User'],
               ),
             ),
           ),
         ),
         FFRoute(
-          name: 'ReservationsCopy',
-          path: '/reservationsCopy',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'ReservationsCopy')
-              : const ReservationsCopyWidget(),
-        ),
-        FFRoute(
-          name: 'ReservationsCopyCopy',
-          path: '/reservationsCopyCopy',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'ReservationsCopyCopy')
-              : const ReservationsCopyCopyWidget(),
+          name: 'Schedul-urgent',
+          path: '/schedulUrgent',
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: SchedulUrgentWidget(
+              serviceid: params.getParam(
+                'serviceid',
+                ParamType.DocumentReference,
+                false,
+                ['Services'],
+              ),
+              uid: params.getParam(
+                'uid',
+                ParamType.DocumentReference,
+                false,
+                ['User'],
+              ),
+            ),
+          ),
         ),
         FFRoute(
           name: 'reschedul-urgent',
@@ -251,9 +246,77 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Booking',
           path: '/booking',
-          builder: (context, params) => const NavBarPage(
+          builder: (context, params) => NavBarPage(
             initialPage: '',
-            page: BookingWidget(),
+            page: BookingWidget(
+              sid: params.getParam(
+                'sid',
+                ParamType.DocumentReference,
+                false,
+                ['Services'],
+              ),
+              userid: params.getParam(
+                'userid',
+                ParamType.DocumentReference,
+                false,
+                ['User'],
+              ),
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ReservationDetails',
+          path: '/reservationDetails',
+          asyncParams: {
+            'reservation':
+                getDoc(['Reservations'], ReservationsRecord.fromSnapshot),
+          },
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: ReservationDetailsWidget(
+              reservation: params.getParam(
+                'reservation',
+                ParamType.Document,
+              ),
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'HomePage',
+          path: '/homePage',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'HomePage')
+              : NavBarPage(
+                  initialPage: 'HomePage',
+                  page: HomePageWidget(
+                    userid: params.getParam(
+                      'userid',
+                      ParamType.DocumentReference,
+                      false,
+                      ['User'],
+                    ),
+                  ),
+                ),
+        ),
+        FFRoute(
+          name: 'S01Copy',
+          path: '/s01Copy',
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: S01CopyWidget(
+              service: params.getParam(
+                'service',
+                ParamType.DocumentReference,
+                false,
+                ['Services'],
+              ),
+              user: params.getParam(
+                'user',
+                ParamType.DocumentReference,
+                false,
+                ['User'],
+              ),
+            ),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
@@ -425,7 +488,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/reservations';
+            return '/sign';
           }
           return null;
         },

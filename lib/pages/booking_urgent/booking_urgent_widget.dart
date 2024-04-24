@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -10,7 +12,14 @@ import 'booking_urgent_model.dart';
 export 'booking_urgent_model.dart';
 
 class BookingUrgentWidget extends StatefulWidget {
-  const BookingUrgentWidget({super.key});
+  const BookingUrgentWidget({
+    super.key,
+    this.service,
+    this.userid,
+  });
+
+  final DocumentReference? service;
+  final DocumentReference? userid;
 
   @override
   State<BookingUrgentWidget> createState() => _BookingUrgentWidgetState();
@@ -282,6 +291,159 @@ class _BookingUrgentWidgetState extends State<BookingUrgentWidget>
                                                       ),
                                                 ),
                                               ),
+                                              Container(
+                                                width: 346.0,
+                                                height: 100.0,
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      width: 267.0,
+                                                      height: 80.0,
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.0),
+                                                      ),
+                                                      child: Align(
+                                                        alignment:
+                                                            const AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        child: InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {},
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceEvenly,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    dateTimeFormat(
+                                                                        'd',
+                                                                        getCurrentTimestamp),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Readex Pro',
+                                                                          fontSize:
+                                                                              20.0,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                  Text(
+                                                                    dateTimeFormat(
+                                                                        'MMM',
+                                                                        getCurrentTimestamp),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Readex Pro',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              SizedBox(
+                                                                height: 50.0,
+                                                                child:
+                                                                    VerticalDivider(
+                                                                  thickness:
+                                                                      2.0,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                ),
+                                                              ),
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    dateTimeFormat(
+                                                                        'EEEE',
+                                                                        getCurrentTimestamp),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Readex Pro',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                  Text(
+                                                                    dateTimeFormat(
+                                                                        'jm',
+                                                                        getCurrentTimestamp),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Readex Pro',
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                        ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                               Padding(
                                                 padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
@@ -373,53 +535,107 @@ class _BookingUrgentWidgetState extends State<BookingUrgentWidget>
                                                   padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 30.0, 0.0, 20.0),
-                                                  child: FFButtonWidget(
-                                                    onPressed: () {
-                                                      print(
-                                                          'Button pressed ...');
-                                                    },
-                                                    text: 'Pay',
-                                                    options: FFButtonOptions(
-                                                      width: 320.0,
-                                                      height: 50.0,
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      iconPadding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      color: const Color(0xFF395C7D),
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .titleSmall
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Lexend Deca',
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 16.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .normal,
+                                                  child: StreamBuilder<
+                                                      ServicesRecord>(
+                                                    stream: ServicesRecord
+                                                        .getDocument(
+                                                            widget.service!),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50.0,
+                                                            height: 50.0,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              valueColor:
+                                                                  AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
                                                               ),
-                                                      elevation: 2.0,
-                                                      borderSide: const BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                        width: 1.0,
-                                                      ),
-                                                    ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      final buttonServicesRecord =
+                                                          snapshot.data!;
+                                                      return FFButtonWidget(
+                                                        onPressed: () async {
+                                                          await ReservationsRecord
+                                                              .collection
+                                                              .doc()
+                                                              .set(
+                                                                  createReservationsRecordData(
+                                                                emergency: true,
+                                                                status:
+                                                                    'in prograss',
+                                                                date:
+                                                                    getCurrentTimestamp,
+                                                                serviceID: widget
+                                                                    .service,
+                                                                serviceName:
+                                                                    buttonServicesRecord
+                                                                        .serviceName,
+                                                                userID:
+                                                                    currentUserReference,
+                                                                edit: false,
+                                                              ));
+
+                                                          context
+                                                              .pushNamed('pay');
+                                                        },
+                                                        text: 'Pay',
+                                                        options:
+                                                            FFButtonOptions(
+                                                          width: 320.0,
+                                                          height: 50.0,
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          iconPadding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          color:
+                                                              const Color(0xFF395C7D),
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .titleSmall
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Lexend Deca',
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        16.0,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                  ),
+                                                          elevation: 2.0,
+                                                          borderSide:
+                                                              const BorderSide(
+                                                            color: Colors
+                                                                .transparent,
+                                                            width: 1.0,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
                                                   ),
                                                 ),
                                               ),
