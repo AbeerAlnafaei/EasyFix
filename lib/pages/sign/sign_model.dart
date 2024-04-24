@@ -11,30 +11,30 @@ class SignModel extends FlutterFlowModel<SignWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for emailAddress_Create widget.
-  FocusNode? emailAddressCreateFocusNode1;
-  TextEditingController? emailAddressCreateController1;
-  String? Function(BuildContext, String?)?
-      emailAddressCreateController1Validator;
-  // State field(s) for emailAddress_Create widget.
-  FocusNode? emailAddressCreateFocusNode2;
-  TextEditingController? emailAddressCreateController2;
-  String? Function(BuildContext, String?)?
-      emailAddressCreateController2Validator;
+  // State field(s) for Name widget.
+  FocusNode? nameFocusNode;
+  TextEditingController? nameTextController;
+  String? Function(BuildContext, String?)? nameTextControllerValidator;
+  // State field(s) for Email_Create widget.
+  FocusNode? emailCreateFocusNode;
+  TextEditingController? emailCreateTextController;
+  String? Function(BuildContext, String?)? emailCreateTextControllerValidator;
+  // State field(s) for Address_Create widget.
+  FocusNode? addressCreateFocusNode;
+  TextEditingController? addressCreateTextController;
+  String? Function(BuildContext, String?)? addressCreateTextControllerValidator;
   // State field(s) for password_Create widget.
   FocusNode? passwordCreateFocusNode;
-  TextEditingController? passwordCreateController;
+  TextEditingController? passwordCreateTextController;
   late bool passwordCreateVisibility;
-  String? Function(BuildContext, String?)? passwordCreateControllerValidator;
+  String? Function(BuildContext, String?)?
+      passwordCreateTextControllerValidator;
   // State field(s) for passwordConfirm widget.
   FocusNode? passwordConfirmFocusNode;
-  TextEditingController? passwordConfirmController;
+  TextEditingController? passwordConfirmTextController;
   late bool passwordConfirmVisibility;
-  String? Function(BuildContext, String?)? passwordConfirmControllerValidator;
+  String? Function(BuildContext, String?)?
+      passwordConfirmTextControllerValidator;
 
   @override
   void initState(BuildContext context) {
@@ -46,19 +46,19 @@ class SignModel extends FlutterFlowModel<SignWidget> {
   void dispose() {
     unfocusNode.dispose();
     tabBarController?.dispose();
-    textFieldFocusNode?.dispose();
-    textController1?.dispose();
+    nameFocusNode?.dispose();
+    nameTextController?.dispose();
 
-    emailAddressCreateFocusNode1?.dispose();
-    emailAddressCreateController1?.dispose();
+    emailCreateFocusNode?.dispose();
+    emailCreateTextController?.dispose();
 
-    emailAddressCreateFocusNode2?.dispose();
-    emailAddressCreateController2?.dispose();
+    addressCreateFocusNode?.dispose();
+    addressCreateTextController?.dispose();
 
     passwordCreateFocusNode?.dispose();
-    passwordCreateController?.dispose();
+    passwordCreateTextController?.dispose();
 
     passwordConfirmFocusNode?.dispose();
-    passwordConfirmController?.dispose();
+    passwordConfirmTextController?.dispose();
   }
 }

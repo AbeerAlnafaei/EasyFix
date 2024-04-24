@@ -6,79 +6,28 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'booking_s01_urgent_model.dart';
-export 'booking_s01_urgent_model.dart';
+import 'booking_urgent_model.dart';
+export 'booking_urgent_model.dart';
 
-class BookingS01UrgentWidget extends StatefulWidget {
-  const BookingS01UrgentWidget({super.key});
+class BookingUrgentWidget extends StatefulWidget {
+  const BookingUrgentWidget({super.key});
 
   @override
-  State<BookingS01UrgentWidget> createState() => _BookingS01UrgentWidgetState();
+  State<BookingUrgentWidget> createState() => _BookingUrgentWidgetState();
 }
 
-class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
+class _BookingUrgentWidgetState extends State<BookingUrgentWidget>
     with TickerProviderStateMixin {
-  late BookingS01UrgentModel _model;
+  late BookingUrgentModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 20.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'rowOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 20.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'columnOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 400.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 400.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 20.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => BookingS01UrgentModel());
+    _model = createModel(context, () => BookingUrgentModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -87,6 +36,59 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
         duration: const Duration(milliseconds: 100),
         curve: Curves.ease,
       );
+    });
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'rowOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'columnOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 400.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 400.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 20.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
     });
   }
 
@@ -167,7 +169,7 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                                     fit: BoxFit.fill,
                                     alignment: const AlignmentDirectional(5.0, 0.0),
                                     image: Image.asset(
-                                      'assets/images/painting1.jpg',
+                                      'assets/images/homeeee.jpg',
                                     ).image,
                                   ),
                                   borderRadius: BorderRadius.circular(0.0),
@@ -207,43 +209,16 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Painting Service',
+                                          'Urgent booking',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Readex Pro',
                                                 color: Colors.white,
+                                                fontSize: 20.0,
                                                 letterSpacing: 0.0,
+                                                fontWeight: FontWeight.bold,
                                               ),
-                                        ),
-                                        const Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    20.0, 0.0, 0.0, 0.0),
-                                            child: Icon(
-                                              Icons.star_sharp,
-                                              color: Color(0xFFF9FF56),
-                                              size: 24.0,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 0.0, 0.0, 0.0),
-                                          child: Text(
-                                            '4.8',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: Colors.white,
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
                                         ),
                                       ],
                                     ),
@@ -289,19 +264,23 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                'Book Now',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color: const Color(0xFF15212C),
-                                                      fontSize: 20.0,
-                                                      letterSpacing: 0.4,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 10.0, 0.0, 10.0),
+                                                child: Text(
+                                                  ' estimated arrival time is one hour',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                ),
                                               ),
                                               Padding(
                                                 padding: const EdgeInsetsDirectional
@@ -387,6 +366,63 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, -1.0),
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 30.0, 0.0, 20.0),
+                                                  child: FFButtonWidget(
+                                                    onPressed: () {
+                                                      print(
+                                                          'Button pressed ...');
+                                                    },
+                                                    text: 'Pay',
+                                                    options: FFButtonOptions(
+                                                      width: 320.0,
+                                                      height: 50.0,
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      iconPadding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      color: const Color(0xFF395C7D),
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Lexend Deca',
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                              ),
+                                                      elevation: 2.0,
+                                                      borderSide: const BorderSide(
+                                                        color:
+                                                            Colors.transparent,
+                                                        width: 1.0,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -403,40 +439,6 @@ class _BookingS01UrgentWidgetState extends State<BookingS01UrgentWidget>
                       ],
                     ),
                   ],
-                ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(0.0, -1.0),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 20.0),
-                  child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
-                    },
-                    text: 'Pay',
-                    options: FFButtonOptions(
-                      width: 320.0,
-                      height: 50.0,
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: const Color(0xFF395C7D),
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Lexend Deca',
-                                color: Colors.white,
-                                fontSize: 16.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.normal,
-                              ),
-                      elevation: 2.0,
-                      borderSide: const BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                    ),
-                  ),
                 ),
               ),
             ],

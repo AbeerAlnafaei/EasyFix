@@ -14,8 +14,16 @@ export '/pages/s03/s03_widget.dart' show S03Widget;
 export '/pages/s04/s04_widget.dart' show S04Widget;
 export '/pages/s05/s05_widget.dart' show S05Widget;
 export '/pages/s06/s06_widget.dart' show S06Widget;
-export '/pages/booking_s01_urgent/booking_s01_urgent_widget.dart'
-    show BookingS01UrgentWidget;
+export '/pages/booking_urgent/booking_urgent_widget.dart'
+    show BookingUrgentWidget;
 export '/pages/schedul_urgent/schedul_urgent_widget.dart'
     show SchedulUrgentWidget;
-export '/pages/calender_copy/calender_copy_widget.dart' show CalenderCopyWidget;
+export '/pages/reschedule_calender/reschedule_calender_widget.dart'
+    show RescheduleCalenderWidget;
+export '/pages/reservations_copy/reservations_copy_widget.dart'
+    show ReservationsCopyWidget;
+export '/pages/reservations_copy_copy/reservations_copy_copy_widget.dart'
+    show ReservationsCopyCopyWidget;
+export '/pages/reschedul_urgent/reschedul_urgent_widget.dart'
+    show ReschedulUrgentWidget;
+export '/pages/booking/booking_widget.dart' show BookingWidget;

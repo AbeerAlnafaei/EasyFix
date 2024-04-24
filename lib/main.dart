@@ -14,6 +14,7 @@ import 'index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
   await initFirebase();
 
@@ -41,6 +42,8 @@ class _MyAppState extends State<MyApp> {
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
 
+  final authUserSub = authenticatedUserStream.listen((_) {});
+
   @override
   void initState() {
     super.initState();
@@ -54,6 +57,13 @@ class _MyAppState extends State<MyApp> {
       const Duration(milliseconds: 1000),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
+  }
+
+  @override
+  void dispose() {
+    authUserSub.cancel();
+
+    super.dispose();
   }
 
   void setThemeMode(ThemeMode mode) => setState(() {
@@ -113,6 +123,8 @@ class _NavBarPageState extends State<NavBarPage> {
       'HomePage': const HomePageWidget(),
       'Reservations': const ReservationsWidget(),
       'Profile': const ProfileWidget(),
+      'ReservationsCopy': const ReservationsCopyWidget(),
+      'ReservationsCopyCopy': const ReservationsCopyCopyWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -149,6 +161,16 @@ class _NavBarPageState extends State<NavBarPage> {
           GButton(
             icon: Icons.person_2,
             text: 'Profile',
+            iconSize: 30.0,
+          ),
+          GButton(
+            icon: Icons.bookmark_outlined,
+            text: 'Reservations',
+            iconSize: 30.0,
+          ),
+          GButton(
+            icon: Icons.bookmark_outlined,
+            text: 'Reservations',
             iconSize: 30.0,
           )
         ],

@@ -23,34 +23,7 @@ class _LogInWidgetState extends State<LogInWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'columnOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(0.0, 60.0),
-          end: const Offset(0.0, 0.0),
-        ),
-        TiltEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(-0.349, 0),
-          end: const Offset(0, 0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -62,11 +35,40 @@ class _LogInWidgetState extends State<LogInWidget>
       length: 1,
       initialIndex: 0,
     )..addListener(() => setState(() {}));
-    _model.emailAddressController ??= TextEditingController();
-    _model.emailAddressFocusNode ??= FocusNode();
+    _model.phoneNOTextController ??= TextEditingController();
+    _model.phoneNOFocusNode ??= FocusNode();
 
-    _model.passwordController ??= TextEditingController();
+    _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'columnOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          TiltEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(-0.349, 0),
+            end: const Offset(0, 0),
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -244,9 +246,9 @@ class _LogInWidgetState extends State<LogInWidget>
                                                     width: double.infinity,
                                                     child: TextFormField(
                                                       controller: _model
-                                                          .emailAddressController,
+                                                          .phoneNOTextController,
                                                       focusNode: _model
-                                                          .emailAddressFocusNode,
+                                                          .phoneNOFocusNode,
                                                       autofocus: true,
                                                       autofillHints: const [
                                                         AutofillHints.email
@@ -254,7 +256,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                       obscureText: false,
                                                       decoration:
                                                           InputDecoration(
-                                                        labelText: 'Email',
+                                                        labelText:
+                                                            'Phone Number',
                                                         labelStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -337,7 +340,6 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                 'Readex Pro',
                                                             letterSpacing: 0.0,
                                                           ),
-                                                      minLines: null,
                                                       keyboardType:
                                                           TextInputType
                                                               .emailAddress,
@@ -346,7 +348,7 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                   context)
                                                               .primary,
                                                       validator: _model
-                                                          .emailAddressControllerValidator
+                                                          .phoneNOTextControllerValidator
                                                           .asValidator(context),
                                                     ),
                                                   ),
@@ -359,7 +361,7 @@ class _LogInWidgetState extends State<LogInWidget>
                                                     width: double.infinity,
                                                     child: TextFormField(
                                                       controller: _model
-                                                          .passwordController,
+                                                          .passwordTextController,
                                                       focusNode: _model
                                                           .passwordFocusNode,
                                                       autofocus: false,
@@ -475,13 +477,12 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                 'Readex Pro',
                                                             letterSpacing: 0.0,
                                                           ),
-                                                      minLines: null,
                                                       cursorColor:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .primary,
                                                       validator: _model
-                                                          .passwordControllerValidator
+                                                          .passwordTextControllerValidator
                                                           .asValidator(context),
                                                     ),
                                                   ),
@@ -505,10 +506,10 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                 .signInWithEmail(
                                                           context,
                                                           _model
-                                                              .emailAddressController
+                                                              .phoneNOTextController
                                                               .text,
                                                           _model
-                                                              .passwordController
+                                                              .passwordTextController
                                                               .text,
                                                         );
                                                         if (user == null) {

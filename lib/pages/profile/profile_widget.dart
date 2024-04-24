@@ -376,7 +376,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 12.0, 0.0),
                                         child: Text(
-                                          'Log out of account',
+                                          'Log out of account?',
                                           textAlign: TextAlign.start,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
@@ -467,7 +467,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         }
                                       },
                                       child: Text(
-                                        'Log Out?',
+                                        'Log Out',
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium

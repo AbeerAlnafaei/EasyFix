@@ -6,7 +6,6 @@ import '/backend/schema/util/firestore_util.dart';
 import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 
 class UserRecord extends FirestoreRecord {
   UserRecord._(
@@ -21,11 +20,6 @@ class UserRecord extends FirestoreRecord {
   String get name => _name ?? '';
   bool hasName() => _name != null;
 
-  // "PhoneNumber" field.
-  int? _phoneNumber;
-  int get phoneNumber => _phoneNumber ?? 0;
-  bool hasPhoneNumber() => _phoneNumber != null;
-
   // "Address" field.
   String? _address;
   String get address => _address ?? '';
@@ -36,11 +30,16 @@ class UserRecord extends FirestoreRecord {
   String get password => _password ?? '';
   bool hasPassword() => _password != null;
 
+  // "email" field.
+  String? _email;
+  String get email => _email ?? '';
+  bool hasEmail() => _email != null;
+
   void _initializeFields() {
     _name = snapshotData['Name'] as String?;
-    _phoneNumber = castToType<int>(snapshotData['PhoneNumber']);
     _address = snapshotData['Address'] as String?;
     _password = snapshotData['Password'] as String?;
+    _email = snapshotData['email'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -78,16 +77,16 @@ class UserRecord extends FirestoreRecord {
 
 Map<String, dynamic> createUserRecordData({
   String? name,
-  int? phoneNumber,
   String? address,
   String? password,
+  String? email,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'Name': name,
-      'PhoneNumber': phoneNumber,
       'Address': address,
       'Password': password,
+      'email': email,
     }.withoutNulls,
   );
 
@@ -100,14 +99,14 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
   @override
   bool equals(UserRecord? e1, UserRecord? e2) {
     return e1?.name == e2?.name &&
-        e1?.phoneNumber == e2?.phoneNumber &&
         e1?.address == e2?.address &&
-        e1?.password == e2?.password;
+        e1?.password == e2?.password &&
+        e1?.email == e2?.email;
   }
 
   @override
-  int hash(UserRecord? e) => const ListEquality()
-      .hash([e?.name, e?.phoneNumber, e?.address, e?.password]);
+  int hash(UserRecord? e) =>
+      const ListEquality().hash([e?.name, e?.address, e?.password, e?.email]);
 
   @override
   bool isValidKey(Object? o) => o is UserRecord;

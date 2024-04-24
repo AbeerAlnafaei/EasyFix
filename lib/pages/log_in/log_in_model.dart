@@ -11,15 +11,15 @@ class LogInModel extends FlutterFlowModel<LogInWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  // State field(s) for emailAddress widget.
-  FocusNode? emailAddressFocusNode;
-  TextEditingController? emailAddressController;
-  String? Function(BuildContext, String?)? emailAddressControllerValidator;
+  // State field(s) for phoneNO widget.
+  FocusNode? phoneNOFocusNode;
+  TextEditingController? phoneNOTextController;
+  String? Function(BuildContext, String?)? phoneNOTextControllerValidator;
   // State field(s) for password widget.
   FocusNode? passwordFocusNode;
-  TextEditingController? passwordController;
+  TextEditingController? passwordTextController;
   late bool passwordVisibility;
-  String? Function(BuildContext, String?)? passwordControllerValidator;
+  String? Function(BuildContext, String?)? passwordTextControllerValidator;
 
   @override
   void initState(BuildContext context) {
@@ -30,10 +30,10 @@ class LogInModel extends FlutterFlowModel<LogInWidget> {
   void dispose() {
     unfocusNode.dispose();
     tabBarController?.dispose();
-    emailAddressFocusNode?.dispose();
-    emailAddressController?.dispose();
+    phoneNOFocusNode?.dispose();
+    phoneNOTextController?.dispose();
 
     passwordFocusNode?.dispose();
-    passwordController?.dispose();
+    passwordTextController?.dispose();
   }
 }

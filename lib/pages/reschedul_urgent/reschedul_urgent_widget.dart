@@ -5,19 +5,19 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'schedul_urgent_model.dart';
-export 'schedul_urgent_model.dart';
+import 'reschedul_urgent_model.dart';
+export 'reschedul_urgent_model.dart';
 
-class SchedulUrgentWidget extends StatefulWidget {
-  const SchedulUrgentWidget({super.key});
+class ReschedulUrgentWidget extends StatefulWidget {
+  const ReschedulUrgentWidget({super.key});
 
   @override
-  State<SchedulUrgentWidget> createState() => _SchedulUrgentWidgetState();
+  State<ReschedulUrgentWidget> createState() => _ReschedulUrgentWidgetState();
 }
 
-class _SchedulUrgentWidgetState extends State<SchedulUrgentWidget>
+class _ReschedulUrgentWidgetState extends State<ReschedulUrgentWidget>
     with TickerProviderStateMixin {
-  late SchedulUrgentModel _model;
+  late ReschedulUrgentModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -26,7 +26,7 @@ class _SchedulUrgentWidgetState extends State<SchedulUrgentWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SchedulUrgentModel());
+    _model = createModel(context, () => ReschedulUrgentModel());
 
     animationsMap.addAll({
       'buttonOnPageLoadAnimation1': AnimationInfo(
@@ -129,8 +129,8 @@ class _SchedulUrgentWidgetState extends State<SchedulUrgentWidget>
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      context.pushNamed('rescheduleCalender');
                     },
                     text: 'Schedule a date',
                     options: FFButtonOptions(
@@ -180,8 +180,8 @@ class _SchedulUrgentWidgetState extends State<SchedulUrgentWidget>
                 child: Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      context.pushNamed('ReservationsCopyCopy');
                     },
                     text: 'Urgent Booking',
                     options: FFButtonOptions(

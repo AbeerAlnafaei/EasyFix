@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -73,13 +74,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const MainpageWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const ReservationsWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const MainpageWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const ReservationsWidget(),
         ),
         FFRoute(
           name: 'Profile',
@@ -193,11 +194,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'BookingS01Urgent',
-          path: '/bookingS01Urgent',
+          name: 'BookingUrgent',
+          path: '/bookingUrgent',
           builder: (context, params) => const NavBarPage(
             initialPage: '',
-            page: BookingS01UrgentWidget(),
+            page: BookingUrgentWidget(),
           ),
         ),
         FFRoute(
@@ -209,11 +210,50 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'calenderCopy',
-          path: '/calenderCopy',
+          name: 'rescheduleCalender',
+          path: '/rescheduleCalender',
+          asyncParams: {
+            'reservation1':
+                getDoc(['Reservations'], ReservationsRecord.fromSnapshot),
+          },
+          builder: (context, params) => NavBarPage(
+            initialPage: '',
+            page: RescheduleCalenderWidget(
+              reservation1: params.getParam(
+                'reservation1',
+                ParamType.Document,
+              ),
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'ReservationsCopy',
+          path: '/reservationsCopy',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'ReservationsCopy')
+              : const ReservationsCopyWidget(),
+        ),
+        FFRoute(
+          name: 'ReservationsCopyCopy',
+          path: '/reservationsCopyCopy',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'ReservationsCopyCopy')
+              : const ReservationsCopyCopyWidget(),
+        ),
+        FFRoute(
+          name: 'reschedul-urgent',
+          path: '/reschedulUrgent',
           builder: (context, params) => const NavBarPage(
             initialPage: '',
-            page: CalenderCopyWidget(),
+            page: ReschedulUrgentWidget(),
+          ),
+        ),
+        FFRoute(
+          name: 'Booking',
+          path: '/booking',
+          builder: (context, params) => const NavBarPage(
+            initialPage: '',
+            page: BookingWidget(),
           ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
@@ -291,7 +331,7 @@ extension _GoRouterStateExtensions on GoRouterState {
       extra != null ? extra as Map<String, dynamic> : {};
   Map<String, dynamic> get allParams => <String, dynamic>{}
     ..addAll(pathParameters)
-    ..addAll(queryParameters)
+    ..addAll(uri.queryParameters)
     ..addAll(extraMap);
   TransitionInfo get transitionInfo => extraMap.containsKey(kTransitionInfoKey)
       ? extraMap[kTransitionInfoKey] as TransitionInfo
@@ -384,8 +424,8 @@ class FFRoute {
           }
 
           if (requireAuth && !appStateNotifier.loggedIn) {
-            appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/mainpage';
+            appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
+            return '/reservations';
           }
           return null;
         },
@@ -463,7 +503,7 @@ class RootPageContext {
   static bool isInactiveRootPage(BuildContext context) {
     final rootPageContext = context.read<RootPageContext?>();
     final isRootPage = rootPageContext?.isRootPage ?? false;
-    final location = GoRouter.of(context).location;
+    final location = GoRouterState.of(context).uri.toString();
     return isRootPage &&
         location != '/' &&
         location != rootPageContext?.errorRoute;

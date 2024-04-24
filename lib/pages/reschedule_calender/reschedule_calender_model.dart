@@ -1,9 +1,10 @@
 import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'calender_copy_widget.dart' show CalenderCopyWidget;
+import 'reschedule_calender_widget.dart' show RescheduleCalenderWidget;
 import 'package:flutter/material.dart';
 
-class CalenderCopyModel extends FlutterFlowModel<CalenderCopyWidget> {
+class RescheduleCalenderModel
+    extends FlutterFlowModel<RescheduleCalenderWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

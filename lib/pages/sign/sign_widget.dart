@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -22,34 +23,7 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'columnOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(0.0, 60.0),
-          end: const Offset(0.0, 0.0),
-        ),
-        TiltEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(-0.349, 0),
-          end: const Offset(0, 0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -61,20 +35,49 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
       length: 1,
       initialIndex: 0,
     )..addListener(() => setState(() {}));
-    _model.textController1 ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.nameTextController ??= TextEditingController();
+    _model.nameFocusNode ??= FocusNode();
 
-    _model.emailAddressCreateController1 ??= TextEditingController();
-    _model.emailAddressCreateFocusNode1 ??= FocusNode();
+    _model.emailCreateTextController ??= TextEditingController();
+    _model.emailCreateFocusNode ??= FocusNode();
 
-    _model.emailAddressCreateController2 ??= TextEditingController();
-    _model.emailAddressCreateFocusNode2 ??= FocusNode();
+    _model.addressCreateTextController ??= TextEditingController();
+    _model.addressCreateFocusNode ??= FocusNode();
 
-    _model.passwordCreateController ??= TextEditingController();
+    _model.passwordCreateTextController ??= TextEditingController();
     _model.passwordCreateFocusNode ??= FocusNode();
 
-    _model.passwordConfirmController ??= TextEditingController();
+    _model.passwordConfirmTextController ??= TextEditingController();
     _model.passwordConfirmFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'columnOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          TiltEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(-0.349, 0),
+            end: const Offset(0, 0),
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -247,9 +250,9 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                         8.0, 12.0, 8.0, 12.0),
                                                 child: TextFormField(
                                                   controller:
-                                                      _model.textController1,
+                                                      _model.nameTextController,
                                                   focusNode:
-                                                      _model.textFieldFocusNode,
+                                                      _model.nameFocusNode,
                                                   autofocus: true,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
@@ -332,9 +335,8 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                             'Readex Pro',
                                                         letterSpacing: 0.0,
                                                       ),
-                                                  minLines: null,
                                                   validator: _model
-                                                      .textController1Validator
+                                                      .nameTextControllerValidator
                                                       .asValidator(context),
                                                 ),
                                               ),
@@ -346,16 +348,16 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .emailAddressCreateController1,
+                                                        .emailCreateTextController,
                                                     focusNode: _model
-                                                        .emailAddressCreateFocusNode1,
+                                                        .emailCreateFocusNode,
                                                     autofocus: true,
                                                     autofillHints: const [
                                                       AutofillHints.email
                                                     ],
                                                     obscureText: false,
                                                     decoration: InputDecoration(
-                                                      labelText: 'phone Number',
+                                                      labelText: 'Email',
                                                       labelStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -429,7 +431,6 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     keyboardType: TextInputType
                                                         .emailAddress,
                                                     cursorColor:
@@ -437,7 +438,7 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .emailAddressCreateController1Validator
+                                                        .emailCreateTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -450,9 +451,9 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .emailAddressCreateController2,
+                                                        .addressCreateTextController,
                                                     focusNode: _model
-                                                        .emailAddressCreateFocusNode2,
+                                                        .addressCreateFocusNode,
                                                     autofocus: true,
                                                     autofillHints: const [
                                                       AutofillHints.email
@@ -533,7 +534,6 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     keyboardType: TextInputType
                                                         .emailAddress,
                                                     cursorColor:
@@ -541,7 +541,7 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .emailAddressCreateController2Validator
+                                                        .addressCreateTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -554,7 +554,7 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .passwordCreateController,
+                                                        .passwordCreateTextController,
                                                     focusNode: _model
                                                         .passwordCreateFocusNode,
                                                     autofocus: false,
@@ -660,13 +660,12 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .passwordCreateControllerValidator
+                                                        .passwordCreateTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -679,7 +678,7 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .passwordConfirmController,
+                                                        .passwordConfirmTextController,
                                                     focusNode: _model
                                                         .passwordConfirmFocusNode,
                                                     autofocus: false,
@@ -786,12 +785,13 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
+                                                    minLines: 1,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .passwordConfirmControllerValidator
+                                                        .passwordConfirmTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -808,10 +808,10 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                       GoRouter.of(context)
                                                           .prepareAuthEvent();
                                                       if (_model
-                                                              .passwordCreateController
+                                                              .passwordCreateTextController
                                                               .text !=
                                                           _model
-                                                              .passwordConfirmController
+                                                              .passwordConfirmTextController
                                                               .text) {
                                                         ScaffoldMessenger.of(
                                                                 context)
@@ -829,17 +829,42 @@ class _SignWidgetState extends State<SignWidget> with TickerProviderStateMixin {
                                                           .createAccountWithEmail(
                                                         context,
                                                         _model
-                                                            .emailAddressCreateController1
+                                                            .emailCreateTextController
                                                             .text,
                                                         _model
-                                                            .passwordCreateController
+                                                            .passwordCreateTextController
                                                             .text,
                                                       );
                                                       if (user == null) {
                                                         return;
                                                       }
 
-                                                      context.goNamedAuth(
+                                                      await UserRecord
+                                                          .collection
+                                                          .doc(user.uid)
+                                                          .update(
+                                                              createUserRecordData(
+                                                            name: _model
+                                                                .nameTextController
+                                                                .text,
+                                                            address: (_model
+                                                                        .addressCreateFocusNode
+                                                                        ?.hasFocus ??
+                                                                    false)
+                                                                .toString(),
+                                                            password: (_model
+                                                                        .passwordCreateFocusNode
+                                                                        ?.hasFocus ??
+                                                                    false)
+                                                                .toString(),
+                                                            email: (_model
+                                                                        .emailCreateFocusNode
+                                                                        ?.hasFocus ??
+                                                                    false)
+                                                                .toString(),
+                                                          ));
+
+                                                      context.pushNamedAuth(
                                                           'HomePage',
                                                           context.mounted);
                                                     },

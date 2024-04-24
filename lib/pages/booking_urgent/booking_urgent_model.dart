@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'booking_s01_urgent_widget.dart' show BookingS01UrgentWidget;
+import 'booking_urgent_widget.dart' show BookingUrgentWidget;
 import 'package:flutter/material.dart';
 
-class BookingS01UrgentModel extends FlutterFlowModel<BookingS01UrgentWidget> {
+class BookingUrgentModel extends FlutterFlowModel<BookingUrgentWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
